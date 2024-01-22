@@ -1,0 +1,210 @@
+[
+    {
+        "name": "Youtube",
+        "preview": "youtube.png",
+        "description": "Video, streams",
+        "links": [
+            "http://youtube.com/"
+        ]
+    },
+    {
+        "name": "Twitch",
+        "preview": "twitch.png",
+        "description": "Streams",
+        "links": [
+            "https://www.twitch.tv/"
+        ]
+    },
+    {
+        "name": "uakino",
+        "preview": "",
+        "description": "Films",
+        "links": [
+            "https://uakino.club/"
+        ]
+    },
+    {
+        "name": "Facebook",
+        "preview": "Facebook_icon.svg",
+        "description": "Social",
+        "links": [
+            "http://facebook.com"
+        ]
+    },
+    {
+        "name": "Twitter",
+        "preview": "Twitter.png",
+        "description": "Social",
+        "links": [
+            "http://twitter.com"
+        ]
+    },
+    {
+        "name": "Rozetka",
+        "preview": "rozetka.svg",
+        "description": "Market",
+        "links": [
+            "http://rozetka.ua/"
+        ]
+    },
+    {
+        "name": "OLX",
+        "preview": "OLX.png",
+        "description": "Market",
+        "links": [
+            "http://olx.ua/"
+        ]
+    },
+    {
+        "name": "Prom",
+        "preview": "prom.png",
+        "description": "Market",
+        "links": [
+            "https://prom.ua/ua/"
+        ]
+    },
+    {
+        "name": "Nikom.biz",
+        "preview": "link.png",
+        "description": "Market",
+        "links": [
+            "https://www.nikom.biz/"
+        ]
+    },
+    {
+        "name": "Outlook",
+        "preview": "outlook.webp",
+        "description": "E-Mail",
+        "links": [
+            "http://outlook.com/"
+        ]
+    },
+    {
+        "name": "Yahoo",
+        "preview": "yahoo.png",
+        "description": "E-Mail",
+        "links": [
+            "http://us-mg6.mail.yahoo.com"
+        ]
+    },
+    {
+        "name": "Spaces",
+        "preview": "spaces.png",
+        "description": "Files, social",
+        "links": [
+            "http://spaces.ru/"
+        ]
+    },
+    {
+        "name": "SoftPortal",
+        "preview": "",
+        "description": "Programs, downloads",
+        "links": [
+            "http://www.softportal.com/"
+        ]
+    },
+    {
+        "name": "9xbuddy",
+        "preview": "9xbuddy.com.png",
+        "description": "Download",
+        "links": [
+            "https://9xbuddy.xyz/"
+        ]
+    },
+    {
+        "name": "Overclockers",
+        "preview": "OC.jpg",
+        "description": "Hardware, software news",
+        "links": [
+            "http://overclockers.ua"
+        ]
+    },
+    {
+        "name": "OldPhones",
+        "preview": "",
+        "description": "Old phones soft, reviews",
+        "links": [
+            "http://oldph.one/"
+        ]
+    },
+    {
+        "name": "Radio",
+        "preview": "iua_logo.svg",
+        "description": "Music, news",
+        "links": [
+            "http://radio.i.ua/"
+        ]
+    },
+    {
+        "name": "FreeSteam",
+        "preview": "freesteam.jpg",
+        "description": "Free games",
+        "links": [
+            "http://freesteam.ru/"
+        ]
+    },
+    {
+        "name": "LEZ",
+        "preview": "lez-logo.png",
+        "description": "Home",
+        "links": [
+            "https://my.lez.com.ua/"
+        ]
+    },
+    {
+        "name": "Office",
+        "preview": "office.png",
+        "description": "Office",
+        "links": [
+            "https://www.office.com/?auth=1"
+        ]
+    },
+    {
+        "name": "Simpcity",
+        "preview": "",
+        "description": "Porn",
+        "links": [
+            "https://simpcity.su/"
+        ]
+    },
+    {
+        "name": "Eraser.io",
+        "preview": "eraser.png",
+        "description": "Draw",
+        "links": [
+            "https://app.eraser.io/dashboard/all"
+        ]
+    },
+    {
+        "name": "javascript.info",
+        "preview": "js.png",
+        "description": "Code",
+        "links": [
+            "https://uk.javascript.info/"
+        ]
+    },
+    {
+        "name": "Codewars",
+        "preview": "codewars.svg",
+        "description": "Code",
+        "links": [
+            "https://www.codewars.com/dashboard"
+        ]
+    },
+    {
+        "name": "Exercism",
+        "preview": "exercism.png",
+        "description": "Code",
+        "links": [
+            "https://exercism.org/tracks/javascript"
+        ]
+    },
+    {
+        "name": "ChatGPT",
+        "preview": "chatGPT.svg",
+        "description": "Code",
+        "links": [
+            "https://chat.openai.com/"
+        ]
+    }
+]
