@@ -168,11 +168,11 @@
         ]
     },
     {
-        "name": "Eraser.io",
-        "preview": "eraser.png",
+        "name": "Excalidraw",
+        "preview": "excalidraw.webp",
         "description": "Draw",
         "links": [
-            "https://app.eraser.io/dashboard/all"
+            "https://excalidraw.com/"
         ]
     },
     {
