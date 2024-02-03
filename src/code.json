@@ -30,5 +30,13 @@
         "links": [
             "https://excalidraw.com/"
         ]
+    },
+    {
+        "name": "Regex101",
+        "preview": "regex101.png",
+        "description": "Code",
+        "links": [
+            "https://regex101.com"
+        ]
     }
 ]

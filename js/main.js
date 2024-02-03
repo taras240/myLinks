@@ -45,7 +45,7 @@ function formatNumber(num, size = 2) {
 //////////////////////////////////////////
 
 var readLinksFromJSON = ({ jsonName, container }) => {
-  fetch(`../src/${jsonName}.json`)
+  fetch(`./src/${jsonName}.json`)
     .then((resp) => resp.json())
     .then((links) => {
       links.forEach((link) => {
@@ -82,8 +82,9 @@ var makeLinkElement = (link) => {
 var makeFolderElement = (folder) => {
   let folderElement = document.createElement("div");
   folderElement.className = "folder-card";
-  if (!SHOW_HIDDEN && folder.hidden === true)
+  if (!SHOW_HIDDEN && folder.hidden === true) {
     folderElement.classList.add("hidden");
+  }
   folderElement.setAttribute("data-private", folder.hidden);
   folderElement.innerHTML = `
         <a class="link-main-information">
