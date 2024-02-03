@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Rozetka",
+        "preview": "rozetka.svg",
+        "description": "Market",
+        "links": [
+            "http://rozetka.ua/"
+        ]
+    },
+    {
+        "name": "OLX",
+        "preview": "OLX.png",
+        "description": "Market",
+        "links": [
+            "http://olx.ua/"
+        ]
+    },
+    {
+        "name": "Prom",
+        "preview": "prom.png",
+        "description": "Market",
+        "links": [
+            "https://prom.ua/ua/"
+        ]
+    },
+    {
+        "name": "Nikom.biz",
+        "preview": "link.png",
+        "description": "Market",
+        "links": [
+            "https://www.nikom.biz/"
+        ]
+    }
+]

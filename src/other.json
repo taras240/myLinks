@@ -1,0 +1,42 @@
+[
+    {
+        "name": "FreeSteam",
+        "preview": "freesteam.jpg",
+        "description": "Free games",
+        "links": [
+            "http://freesteam.ru/"
+        ]
+    },
+    {
+        "name": "Radio",
+        "preview": "iua_logo.svg",
+        "description": "Music, news",
+        "links": [
+            "http://radio.i.ua/"
+        ]
+    },
+    {
+        "name": "OldPhones",
+        "preview": "",
+        "description": "Old phones soft, reviews",
+        "links": [
+            "http://oldph.one/"
+        ]
+    },
+    {
+        "name": "SoftPortal",
+        "preview": "",
+        "description": "Programs, downloads",
+        "links": [
+            "http://www.softportal.com/"
+        ]
+    },
+    {
+        "name": "Yahoo",
+        "preview": "yahoo.png",
+        "description": "E-Mail",
+        "links": [
+            "http://us-mg6.mail.yahoo.com"
+        ]
+    }
+]

@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Exercism",
+        "preview": "exercism.png",
+        "description": "Code",
+        "links": [
+            "https://exercism.org/tracks/javascript"
+        ]
+    },
+    {
+        "name": "Codewars",
+        "preview": "codewars.svg",
+        "description": "Code",
+        "links": [
+            "https://www.codewars.com/dashboard"
+        ]
+    },
+    {
+        "name": "javascript.info",
+        "preview": "js.png",
+        "description": "Code",
+        "links": [
+            "https://uk.javascript.info/"
+        ]
+    },
+    {
+        "name": "Excalidraw",
+        "preview": "excalidraw.webp",
+        "description": "Draw",
+        "links": [
+            "https://excalidraw.com/"
+        ]
+    }
+]
