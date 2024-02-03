@@ -1,11 +1,11 @@
 const DAY_OF_A_WEEK = {
+  0: "Неділя",
   1: "Понеділок",
   2: "Вівторок",
   3: "Середа",
   4: "Четвер",
   5: "П'ятниця",
   6: "Субота",
-  7: "Неділя",
 };
 const MONTH_OF_A_YEAR = {
   1: "Січня",
@@ -31,6 +31,7 @@ const linksContainer = document.querySelector(".links-container");
 const headerClock = document.querySelector("#header-clock");
 const folderContainer = document.querySelector(".folder_container");
 const folderLinkContainer = document.querySelector(".folder-links");
+const creationContainer = document.querySelector(".creator_container");
 var myLinks;
 
 function formatNumber(num, size = 2) {
@@ -58,7 +59,8 @@ var parseElement = ({ showHidden = SHOW_HIDDEN, link }) => {
   switch (link.type) {
     case "folder":
       return makeFolderElement(link);
-      break;
+    case "addCustom":
+      return addCusstomElement();
     default:
       return makeLinkElement(link);
       break;
@@ -131,6 +133,12 @@ document.addEventListener("keydown", (e) => {
 document.querySelector(".close-folder_button").addEventListener("click", () => {
   closeFolder();
 });
+////  CLOSE CREATION BUTTON  ///////////////
+document
+  .querySelector(".close-creation_button")
+  .addEventListener("click", () => {
+    closeCreation();
+  });
 
 ////////////////////////////////////////////
 /////   ADDITIONAL FUNCTIONS     ///////////
@@ -152,6 +160,28 @@ var openFoler = (folder) => {
 var closeFolder = () => {
   folderContainer.classList.remove("active");
   folderLinkContainer.innerHTML = "";
+};
+var closeCreation = () => {
+  creationContainer.classList.remove("active");
+};
+var openCreation = () => {
+  creationContainer.classList.remove("active");
+  creationContainer.classList.add("active");
+};
+
+var addCusstomElement = () => {
+  let creationElement = document.createElement("div");
+  creationElement.className = "creation-card";
+
+  creationElement.innerHTML = `
+        <a class="link-main-information">
+        <img class="link-preview" src="./src/img/add.png" alt=""></img>              
+    </a>
+    `;
+  creationElement.addEventListener("click", () => {
+    openCreation();
+  });
+  return creationElement;
 };
 
 //////   UPDATE TIME  /////////////////////

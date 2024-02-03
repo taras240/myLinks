@@ -105,9 +105,8 @@
     },
     {
         "name": "",
-        "type": "folder",
+        "type": "addCustom",
         "preview": "add.png",
-        "hidden": false,
         "listName": "other"
     }
 ]

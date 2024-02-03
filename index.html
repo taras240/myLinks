@@ -45,6 +45,76 @@
           <div class="folder-links"></div>
           <button class="close-folder_button">X</button>
         </div>
+        <div class="creator_container">
+          <h2 class="creation-header">Створити елемент</h2>
+          <button class="close-creation_button">X</button>
+          <form class="creation-form" action="#" method="get">
+            <div class="">
+              <input
+                type="text"
+                placeholder="Назва елемента"
+                id="elementLabel"
+                name="elementLabel"
+                value=""
+              />
+            </div>
+
+            <div class="element-type-selection">
+              <!-- <div class="">Виберіть тип елемента:</div> -->
+              <div>
+                <input
+                  type="radio"
+                  id="link"
+                  name="element-type"
+                  value="link"
+                />
+                <label for="link">Посилання</label>
+                <input
+                  type="text"
+                  placeholder="https://..........."
+                  id="link-url"
+                  name="link-url"
+                  value=""
+                />
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="folder"
+                  name="element-type"
+                  value="link"
+                />
+                <label for="folder">Папка</label>
+              </div>
+              <div class="">
+                <input
+                  type="checkbox"
+                  id="visibility"
+                  name="visibility"
+                  value="hidden"
+                />
+                <label for="visibility">Прихований</label>
+              </div>
+            </div>
+            <div class="">
+              <input
+                type="text"
+                placeholder="Посилання на значок"
+                name="preview-url"
+                value=""
+              />
+            </div>
+            <div class="">
+              <input
+                type="text"
+                placeholder="Опис"
+                name="description"
+                value=""
+              />
+            </div>
+            <button id="saveElement">Зберегти</button>
+          </form>
+        </div>
       </main>
       <footer>
         <div class="container">
