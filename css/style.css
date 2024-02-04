@@ -19,7 +19,6 @@ body {
 }
 main {
   flex: 1;
-  overflow-y: scroll;
   display: flex;
   flex-direction: column;
 }
@@ -32,7 +31,6 @@ header {
   position: sticky;
   top: 0;
   background-color: rgb(18, 28, 43);
-  /* box-shadow: 0 -1px 25px rgb(42, 48, 83); */
 }
 .header_container {
   display: flex;
@@ -130,6 +128,7 @@ main .main_container {
   display: flex;
   flex-direction: column;
   position: fixed;
+  overflow: auto;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -139,7 +138,6 @@ main .main_container {
   margin: 0 auto;
   border-radius: 10px;
   border: 2px solid rgba(255, 255, 255, 0.699);
-  overflow: hidden;
   background-color: rgb(0, 0, 0);
   padding: 0;
   visibility: hidden;
@@ -189,7 +187,6 @@ main .main_container {
   align-items: center;
   justify-content: center;
   margin: 30px 20px;
-  overflow: scroll;
 }
 
 .creation-form {
@@ -224,7 +221,7 @@ input[type="text"] {
   border-radius: 10px;
   padding: 10px;
 }
-#link-url {
+#new-element-url {
   margin: 0 20px;
   height: 30px;
   border-radius: 5px;

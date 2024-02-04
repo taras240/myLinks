@@ -48,12 +48,12 @@
         <div class="creator_container">
           <h2 class="creation-header">Створити елемент</h2>
           <button class="close-creation_button">X</button>
-          <form class="creation-form" action="#" method="get">
+          <div class="creation-form">
             <div class="">
               <input
                 type="text"
                 placeholder="Назва елемента"
-                id="elementLabel"
+                id="new-element-label"
                 name="elementLabel"
                 value=""
               />
@@ -72,7 +72,7 @@
                 <input
                   type="text"
                   placeholder="https://..........."
-                  id="link-url"
+                  id="new-element-url"
                   name="link-url"
                   value=""
                 />
@@ -89,7 +89,7 @@
               <div class="">
                 <input
                   type="checkbox"
-                  id="visibility"
+                  id="new-element-visibility"
                   name="visibility"
                   value="hidden"
                 />
@@ -100,6 +100,7 @@
               <input
                 type="text"
                 placeholder="Посилання на значок"
+                id="new-element-preview"
                 name="preview-url"
                 value=""
               />
@@ -109,11 +110,12 @@
                 type="text"
                 placeholder="Опис"
                 name="description"
+                id="new-element-description"
                 value=""
               />
             </div>
-            <button id="saveElement">Зберегти</button>
-          </form>
+            <button id="saveElement">Зберегти</butt>
+            </div>
         </div>
       </main>
       <footer>

@@ -46,24 +46,21 @@ function formatNumber(num, size = 2) {
 //////////////////////////////////////////
 
 var readLinksFromJSON = ({ jsonName, container }) => {
-  fetch(`./src/${jsonName}.json`)
-    .then((resp) => resp.json())
-    .then((links) => {
-      links.forEach((link) => {
-        let element = parseElement({ link: link });
-        element ? container.appendChild(element) : "";
-      });
-    });
+  let jsonElements = JSON.parse(localStorage.getItem(jsonName));
+  jsonElements.forEach((link) => {
+    let element = parseElement({ link: link });
+    element ? container.appendChild(element) : "";
+  });
 };
+
 var parseElement = ({ showHidden = SHOW_HIDDEN, link }) => {
   switch (link.type) {
     case "folder":
       return makeFolderElement(link);
     case "addCustom":
-      return addCusstomElement();
+      return makeCusstomElement();
     default:
       return makeLinkElement(link);
-      break;
   }
 };
 var makeLinkElement = (link) => {
@@ -103,8 +100,40 @@ var makeFolderElement = (folder) => {
   });
   return folderElement;
 };
+var makeCusstomElement = () => {
+  let creationElement = document.createElement("div");
+  creationElement.className = "creation-card";
 
-readLinksFromJSON({ jsonName: "links-list", container: linksContainer });
+  creationElement.innerHTML = `
+        <a class="link-main-information">
+        <img class="link-preview" src="./src/img/add.png" alt=""></img>              
+    </a>
+    `;
+  creationElement.addEventListener("click", () => {
+    openCreation();
+  });
+  return creationElement;
+};
+
+var saveLinksToLocalStorage = (jsonName, fun) => {
+  fetch(`./src/${jsonName}.json`)
+    .then((resp) => resp.json())
+    .then((resp) => {
+      localStorage.setItem(jsonName, JSON.stringify(resp));
+      fun();
+    });
+};
+var openLinkList = (linksListName, container) => {
+  if (!localStorage.getItem(linksListName)) {
+    saveLinksToLocalStorage(linksListName, () =>
+      readLinksFromJSON({ jsonName: linksListName, container: container })
+    );
+  } else {
+    readLinksFromJSON({ jsonName: linksListName, container: container });
+  }
+};
+
+openLinkList("links-list", linksContainer);
 
 //////////////////////////////////////////////
 //////     ADD EVENTS LISTINERS     //////////
@@ -139,6 +168,28 @@ document
   .addEventListener("click", () => {
     closeCreation();
   });
+////   SAVE CREATION BUTTON   //////////////
+var verifyNewElementData = () => {
+  return true;
+};
+var saveElement = () => {
+  if (verifyNewElementData()) {
+    let newElement = {
+      name: document.querySelector("#new-element-label").value,
+      preview: document.querySelector("#new-element-preview").value,
+      description: document.querySelector("#new-element-description").value,
+      links: [document.querySelector("#new-element-url").value],
+      // hidden: document.querySelector("new-element-visibility").checked,
+    };
+    console.log(newElement);
+    let array = [...JSON.parse(localStorage.getItem("links-list"))];
+
+    console.log(array);
+  }
+};
+document.querySelector("#saveElement").addEventListener("click", () => {
+  saveElement();
+});
 
 ////////////////////////////////////////////
 /////   ADDITIONAL FUNCTIONS     ///////////
@@ -146,13 +197,12 @@ document
 
 ////   OPEN / CLOSE FOLDER    //////////////////////
 var openFoler = (folder) => {
+  closeFolder();
+  closeCreation();
   if (!folderContainer.classList.contains("active")) {
     document.querySelector(".folder-header").innerText = folder.name;
     folderContainer.classList.add("active");
-    readLinksFromJSON({
-      jsonName: folder.listName,
-      container: folderLinkContainer,
-    });
+    openLinkList(folder.listName, folderLinkContainer);
   } else {
     closeFolder();
   }
@@ -161,27 +211,14 @@ var closeFolder = () => {
   folderContainer.classList.remove("active");
   folderLinkContainer.innerHTML = "";
 };
-var closeCreation = () => {
-  creationContainer.classList.remove("active");
-};
+
 var openCreation = () => {
-  creationContainer.classList.remove("active");
+  closeFolder();
+  closeCreation();
   creationContainer.classList.add("active");
 };
-
-var addCusstomElement = () => {
-  let creationElement = document.createElement("div");
-  creationElement.className = "creation-card";
-
-  creationElement.innerHTML = `
-        <a class="link-main-information">
-        <img class="link-preview" src="./src/img/add.png" alt=""></img>              
-    </a>
-    `;
-  creationElement.addEventListener("click", () => {
-    openCreation();
-  });
-  return creationElement;
+var closeCreation = () => {
+  creationContainer.classList.remove("active");
 };
 
 //////   UPDATE TIME  /////////////////////
