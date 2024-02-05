@@ -4,8 +4,8 @@
   src: url("../src/font/Rubik-VariableFont_wght.ttf") format("truetype");
 }
 body {
-  background-image: url("../src/img/bg-dark.png");
-  /* background-color: rgb(14, 13, 13); */
+  /* background-image: url("../src/img/bg-dark.png"); */
+  background-color: rgb(14, 13, 13);
   background-repeat: repeat;
   font-family: "Rubik";
   user-select: none;
