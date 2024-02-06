@@ -103,7 +103,7 @@ openLinkList("links-list", linksContainer);
 /// PRESS SOME BUTTON EVENTS       ///////////
 document.addEventListener("keydown", (e) => {
   switch (e.code) {
-    case "KeyX":
+    case "NumLock":
       SHOW_HIDDEN = !SHOW_HIDDEN;
       localStorage.setItem("SHOW_HIDDEN", SHOW_HIDDEN);
       let hiddenElements = document.querySelectorAll("[data-private = 'true']");
@@ -114,7 +114,7 @@ document.addEventListener("keydown", (e) => {
       });
       break;
     default:
-      console.log(e.code);
+      // console.log(e.code);
       break;
   }
 });
@@ -142,10 +142,10 @@ var saveElement = () => {
       links: [document.querySelector("#new-element-url").value],
       // hidden: document.querySelector("new-element-visibility").checked,
     };
-    console.log(newElement);
+    // console.log(newElement);
     let array = [...JSON.parse(localStorage.getItem("links-list"))];
 
-    console.log(array);
+    // console.log(array);
   }
 };
 document.querySelector("#saveElement").addEventListener("click", () => {

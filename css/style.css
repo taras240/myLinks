@@ -64,6 +64,19 @@ main .main_container {
   margin: auto;
   padding: 0 25px;
 }
+.search-bar_container {
+  width: 100vw;
+}
+#search-bar {
+  display: block;
+  height: 40px;
+  width: 400px;
+  border: 1px solid var(--primary-color);
+  border-radius: 20px;
+  padding: 0 20px;
+  font-size: 22px;
+  margin: 50px auto 20px;
+}
 .links-container {
   flex: 1;
   display: flex;
