@@ -65,8 +65,10 @@ var makeCusstomElement = () => {
 
   creationElement.innerHTML = `
         <a class="link-main-information">
-        <img class="link-preview" src="./src/img/add.png" alt=""></img>              
+        <img class="link-preview" src="./src/img/add.png" alt=""></img>   
+        <div class="link-name">Create element</div>           
     </a>
+    
     `;
   creationElement.addEventListener("click", () => {
     openCreation();

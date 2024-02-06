@@ -21,7 +21,7 @@ const MONTH_OF_A_YEAR = {
   11: "Листопада",
   12: "Грудня",
 };
-
+let dayNum = 0;
 function formatNumber(num, size = 2) {
   return num.toLocaleString("en-US", {
     minimumIntegerDigits: size,

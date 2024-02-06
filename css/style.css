@@ -1,7 +1,12 @@
 @import url(reset.css);
+@import url(weather.css);
 @font-face {
   font-family: "Rubik";
   src: url("../src/font/Rubik-VariableFont_wght.ttf") format("truetype");
+}
+:root {
+  --primary-color: rgb(47 56 63 / 75%);
+  --hover-color: rgb(31, 71, 104);
 }
 body {
   /* background-image: url("../src/img/bg-dark.png"); */
@@ -24,7 +29,7 @@ main {
 }
 .container {
   max-width: 1200px;
-  margin: auto;
+  margin: 0 auto;
   padding: 0 10px;
 }
 header {
@@ -60,6 +65,7 @@ main .main_container {
   padding: 0 25px;
 }
 .links-container {
+  flex: 1;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -68,19 +74,29 @@ main .main_container {
   justify-content: space-around;
   padding: 10px 0;
 }
+.weather_container {
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 20px;
+  width: 100%;
+}
 .link-card,
 .folder-card,
 .creation-card {
   height: 110px;
   min-width: 200px;
-  margin: 5px auto;
-  padding: 10px;
+  margin: 5px auto 0;
+  /* padding: 10px; */
   border-radius: 10px;
+  border: 1px solid var(--primary-color);
   overflow: hidden;
-  font-weight: 400;
-  font-size: 26px;
+  font-weight: 500;
+  font-size: 20px;
   color: rgb(202, 202, 202);
-  background-color: rgb(47 56 63 / 75%);
+  /* background-color: var(--primary-color); */
   transition: 0.2s;
 }
 .folder_container .link-card {
@@ -89,7 +105,9 @@ main .main_container {
 .link-card:hover,
 .folder-card:hover,
 .creation-card:hover {
-  background-color: rgb(31, 71, 104);
+  border: 1px solid var(--hover-color);
+
+  /* background-color: var(--hover-color); */
   transition: 0.2s;
   color: rgb(255, 255, 255);
 }
@@ -114,15 +132,24 @@ main .main_container {
 }
 
 .link-preview {
+  flex: 1;
+  padding: 10px 0;
   height: 60px;
   border-radius: 10px;
   overflow: hidden;
   background-size: cover;
 }
 .link-name {
+  background-color: var(--primary-color);
+  width: 100%;
   font-weight: 600;
+  text-align: center;
 }
-
+.link-card:hover .link-name,
+.folder-card:hover .link-name,
+.creation-card:hover .link-name {
+  background-color: var(--hover-color);
+}
 .folder_container,
 .creator_container {
   display: flex;
