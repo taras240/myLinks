@@ -57,11 +57,12 @@ header {
 }
 main .main_container {
   height: 100%;
+  flex: 1;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin: auto;
+  /* margin: 0 auto; */
   padding: 0 25px;
 }
 .search-bar_container {
@@ -91,9 +92,9 @@ main .main_container {
   margin-bottom: 25px;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  gap: 20px;
+  /* flex-wrap: wrap; */
+  justify-content: center;
+  gap: 0px;
   width: 100%;
 }
 .link-card,

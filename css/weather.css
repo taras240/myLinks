@@ -1,23 +1,28 @@
 .weather-card {
   color: white;
   text-align: center;
-  font-size: 20px;
-  width: 110px;
-  border: 1px solid var(--primary-color);
-  border-radius: 10px;
+  font-size: 14px;
+  width: 90px;
   overflow: hidden;
   cursor: pointer;
-  transition: 0.5s;
+  border-color: var(--primary-color);
+  border-style: solid;
+  border-left-width: 1px;
+  transition: 0.2s;
+}
+.weather-card:last-child {
+  border-right-width: 1px;
 }
 .weather-card:hover {
-  margin-top: -20px;
+  /* margin-top: -20px;
   margin-bottom: 20px;
-  border: 1px solid var(--hover-color);
-  transition: 0.5s;
+  border: 1px solid var(--hover-color); */
+  width: 110px;
+  transition: 0.2s;
 }
 .weather-card_day {
-  line-height: 35px;
-  margin-bottom: 5px;
+  line-height: 30px;
+  /* margin-bottom: 5px; */
   /* background-color: var(--primary-color); */
   transition: 0.5s;
 }
@@ -26,21 +31,22 @@
   transition: 0.5s;
 }
 .weather-card_min-temp {
-  line-height: 22px;
+  /* line-height: 22px; */
 }
 .weather-card_max-temp {
-  font-size: 24px;
-  line-height: 40px;
+  font-size: 16px;
+  line-height: 30px;
 }
 .weather-card_min-temp::after,
 .weather-card_max-temp::after {
   content: "\00b0 C";
 }
 .weather-card_max-icon {
-  margin: -10px 0 -5px;
+  margin: -10px auto -5px;
+  width: 90px;
 }
 .weather-card_description {
-  font-size: 18px;
+  /* font-size: 16px; */
 }
 .weather-card_precipitation-prob {
   line-height: 35px;
