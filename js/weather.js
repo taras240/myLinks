@@ -1,11 +1,21 @@
 const OWAK = "d079728d9385e995c4273bb215a58c03";
-const coord = { lat: 49.171, lon: 23.1726 };
+const coord = { lat: 49.279041, lon: 23.297236 };
 let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${coord.lat}&lon=${coord.lon}&appid=${OWAK}&lang=ua&units=metric`;
 // let url = `http://api.openweathermap.org/data/2.5/forecast?id=${city_IDs.boryslav}&appid=${API_KEY}&lang=ua&units=metric`;
 let curDayNum = new Date().getDay();
-const weather = [];
+let weather = [];
+let currentWeather = {};
 
 function parseWeather(weatherJSON) {
+  // console.log(weatherJSON);
+  currentWeather = {
+    temp: Math.round(weatherJSON["current"]["temp"]) + "°C",
+    iconName: weatherJSON["current"]["weather"][0]["icon"],
+    weather: weatherJSON["current"]["weather"][0]["description"],
+    humidity: weatherJSON["current"]["humidity"],
+    feelsTemp: weatherJSON["current"]["feels_like"] + "°C",
+    windSpeed: Math.round(weatherJSON["current"]["wind_speed"]) + "м/с",
+  };
   weatherJSON["daily"].forEach((day) => {
     let dayWeather = {
       minTemp: Math.round(day["temp"]["min"]),
@@ -17,9 +27,18 @@ function parseWeather(weatherJSON) {
     };
     weather.push(dayWeather);
   });
+  createHeaderWeather(currentWeather);
   createWeatherCards(weather);
 }
-
+function createHeaderWeather(currentWeather) {
+  headerWeatherContainer.innerHTML = `
+   <img
+    class="header-weather_prev"
+    src="https://openweathermap.org/img/wn/${currentWeather.iconName}@2x.png"
+    alt="погода"
+  />
+  <div class="header-temp">${currentWeather.temp}</div>`;
+}
 function createWeatherCards(weather) {
   weather.forEach((day, index) => {
     let curDay =

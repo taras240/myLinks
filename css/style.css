@@ -41,19 +41,31 @@ header {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 10px;
   height: 50px;
-}
-.header-logo {
   color: rgb(242, 248, 233);
   font-weight: 600;
+  font-size: 26px;
+}
+.header-logo {
+  flex: 1;
   font-size: 30px;
   margin-right: 50px;
   pointer-events: none;
 }
-#header-clock {
+/* #header-clock {
   color: white;
-  font-size: 26px;
+
+} */
+#header-weather {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+.header-weather_prev {
+  height: 60px;
 }
 main .main_container {
   height: 100%;
