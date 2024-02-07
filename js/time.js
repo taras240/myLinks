@@ -34,7 +34,7 @@ var updateTime = () => {
   var time = new Date();
   var curTime = `${formatNumber(time.getHours())}:${formatNumber(
     time.getMinutes()
-  )}:${formatNumber(time.getSeconds())}`;
+  )}`; //:${formatNumber(time.getSeconds())} seconds
   var curDate = ` ${DAY_OF_A_WEEK[time.getDay()]} ${time.getDate()} ${
     MONTH_OF_A_YEAR[time.getMonth() + 1]
   }`;

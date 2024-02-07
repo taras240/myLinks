@@ -12,9 +12,11 @@ function parseWeather(weatherJSON) {
     temp: Math.round(weatherJSON["current"]["temp"]) + "°C",
     iconName: weatherJSON["current"]["weather"][0]["icon"],
     weather: weatherJSON["current"]["weather"][0]["description"],
-    humidity: weatherJSON["current"]["humidity"],
-    feelsTemp: weatherJSON["current"]["feels_like"] + "°C",
+    humidity: weatherJSON["current"]["humidity"] + "%",
+    feelsTemp: Math.round(weatherJSON["current"]["feels_like"]) + "°C",
     windSpeed: Math.round(weatherJSON["current"]["wind_speed"]) + "м/с",
+    sunrise: new Date(weatherJSON["current"]["sunrise"] * 1000),
+    sunset: new Date(weatherJSON["current"]["sunset"] * 1000),
   };
   weatherJSON["daily"].forEach((day) => {
     let dayWeather = {
@@ -31,13 +33,24 @@ function parseWeather(weatherJSON) {
   createWeatherCards(weather);
 }
 function createHeaderWeather(currentWeather) {
-  headerWeatherContainer.innerHTML = `
-   <img
-    class="header-weather_prev"
-    src="https://openweathermap.org/img/wn/${currentWeather.iconName}@2x.png"
-    alt="погода"
-  />
-  <div class="header-temp">${currentWeather.temp}</div>`;
+  headerTemp.innerText = currentWeather.temp;
+  headerWeatherPrev.setAttribute(
+    "src",
+    `https://openweathermap.org/img/wn/${currentWeather.iconName}@2x.png`
+  );
+  headerWeatherHint.innerHTML = `
+  <div class="header-hint_temp">Температура: ${currentWeather.temp}</div>
+  <div class="header-hint_feels-temp">Відчувається як: ${
+    currentWeather.feelsTemp
+  }</div>
+  <div class="header-hint_weather">Погода: ${currentWeather.weather}</div>
+  <div class="header-hint_humidity">Вологість: ${currentWeather.humidity}</div>
+  <div class="header-hint_wind">Швидкість вітру: ${
+    currentWeather.windSpeed
+  }</div>
+  <div class="header-hint_wind">Схід сонця: ${currentWeather.sunrise.getHours()}:${currentWeather.sunrise.getMinutes()}</div>
+  <div class="header-hint_wind">Захід сонця: ${currentWeather.sunset.getHours()}:${currentWeather.sunset.getMinutes()}</div>          
+  `;
 }
 function createWeatherCards(weather) {
   weather.forEach((day, index) => {
