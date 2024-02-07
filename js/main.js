@@ -1,4 +1,4 @@
-let SHOW_HIDDEN = localStorage.getItem("SHOW_HIDDEN") === "true";
+let SHOW_HIDDEN = false; // localStorage.getItem("SHOW_HIDDEN") === "true";
 
 //////////////////////////////////////////
 //////   READ LINKS FROM JSON        /////
