@@ -197,7 +197,7 @@ main .main_container {
   width: 50vw;
   margin: 0 auto;
   border-radius: 10px;
-  border: 2px solid rgba(255, 255, 255, 0.699);
+  /* border: 2px solid rgba(255, 255, 255, 0.699); */
   background-color: rgb(0, 0, 0);
   padding: 0;
   visibility: hidden;
@@ -213,23 +213,22 @@ main .main_container {
 .folder-header,
 .creation-header {
   width: 100%;
-  background-color: rgb(46, 46, 46);
+  background-color: var(--hover-color);
   color: aliceblue;
-  font-size: 28px;
+  font-size: 22px;
   font-weight: 600;
-  line-height: 40px;
+  line-height: 30px;
   text-align: center;
-  text-transform: uppercase;
 }
 .close-folder_button,
 .close-creation_button {
   position: absolute;
   background-color: red;
   opacity: 0.8;
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 600;
   width: 50px;
-  height: 40px;
+  height: 30px;
   top: 0;
   right: 0;
   transition: 0.2s;
