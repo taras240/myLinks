@@ -102,7 +102,7 @@ main .main_container {
   flex-wrap: wrap;
   gap: 15px 10px;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   padding: 10px 0;
 }
 .weather_container {
@@ -120,7 +120,7 @@ main .main_container {
 .creation-card {
   height: 90px;
   min-width: 110px;
-  margin: 5px auto 0;
+  /* margin: 5px auto 0; */
   /* padding: 10px; */
   border-radius: 10px;
   border: 1px solid transparent;
