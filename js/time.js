@@ -38,7 +38,8 @@ var updateTime = () => {
   var curDate = ` ${DAY_OF_A_WEEK[time.getDay()]} ${time.getDate()} ${
     MONTH_OF_A_YEAR[time.getMonth() + 1]
   }`;
-  headerClock.innerText = curDate + "\t" + curTime;
+  headerClock.innerText = curDate; //+ "\t" + curTime;
+  clockContainer.innerText = curTime;
 };
 updateTime();
 const timeInterval = setInterval(updateTime, 1000);
