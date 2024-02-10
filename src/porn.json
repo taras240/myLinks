@@ -10,7 +10,7 @@
     },
     {
         "name": "Pornhub",
-        "preview": "ph.png!s",
+        "preview": "./src/img/ph.png!s",
         "hidden": true,
         "description": "Porn",
         "links": [
@@ -19,7 +19,7 @@
     },
     {
         "name": "Xvideos",
-        "preview": "xvideos.png",
+        "preview": "./src/img/xvideos.png",
         "hidden": true,
         "description": "Porn",
         "links": [
@@ -28,7 +28,7 @@
     },
     {
         "name": "SpankBang",
-        "preview": "sb.png",
+        "preview": "./src/img/sb.png",
         "hidden": true,
         "description": "Porn",
         "links": [
@@ -37,7 +37,7 @@
     },
     {
         "name": "9xbuddy",
-        "preview": "9xbuddy.com.png",
+        "preview": "./src/img/9xbuddy.com.png",
         "description": "Download",
         "links": [
             "https://9xbuddy.xyz/"
@@ -45,7 +45,7 @@
     },
     {
         "name": "Spaces",
-        "preview": "spaces.png",
+        "preview": "./src/img/spaces.png",
         "description": "Files, social",
         "links": [
             "http://spaces.ru/"
@@ -53,7 +53,7 @@
     },
     {
         "name": "Mega.nz",
-        "preview": "mega.webp",
+        "preview": "./src/img/mega.webp",
         "description": "Files",
         "links": [
             "https://mega.nz/"

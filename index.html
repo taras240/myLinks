@@ -71,9 +71,11 @@
               <div>
                 <input
                   type="radio"
+                  class="radio-link-type"
                   id="link"
                   name="element-type"
                   value="link"
+                  checked
                 />
                 <label for="link">Посилання</label>
                 <input
@@ -87,9 +89,10 @@
               <div>
                 <input
                   type="radio"
+                  class="radio-folder-type"
                   id="folder"
                   name="element-type"
-                  value="link"
+                  value="folder"
                 />
                 <label for="folder">Папка</label>
               </div>
@@ -100,7 +103,7 @@
                   name="visibility"
                   value="hidden"
                 />
-                <label for="visibility">Прихований</label>
+                <label for="new-element-visibility">Прихований</label>
               </div>
             </div>
             <div class="">
@@ -121,7 +124,9 @@
                 value=""
               />
             </div>
-            <button id="saveElement">Зберегти</button>
+            <button id="saveElement" onclick="saveElement(this)">
+              Зберегти
+            </button>
           </div>
         </div>
       </main>

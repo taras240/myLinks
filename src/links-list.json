@@ -1,7 +1,7 @@
 [
     {
         "name": "Youtube",
-        "preview": "youtube.png",
+        "preview": "./src/img/youtube.png",
         "description": "Video, streams",
         "links": [
             "http://youtube.com/"
@@ -9,7 +9,7 @@
     },
     {
         "name": "Twitch",
-        "preview": "twitch.png",
+        "preview": "./src/img/twitch.png",
         "description": "Streams",
         "links": [
             "https://www.twitch.tv/"
@@ -25,7 +25,7 @@
     },
     {
         "name": "Facebook",
-        "preview": "Facebook_icon.svg",
+        "preview": "./src/img/Facebook_icon.svg",
         "description": "Social",
         "links": [
             "http://facebook.com"
@@ -33,7 +33,7 @@
     },
     {
         "name": "Twitter",
-        "preview": "Twitter.png",
+        "preview": "./src/img/Twitter.png",
         "description": "Social",
         "links": [
             "http://twitter.com"
@@ -41,7 +41,7 @@
     },
     {
         "name": "Outlook",
-        "preview": "outlook.webp",
+        "preview": "./src/img/outlook.webp",
         "description": "E-Mail",
         "links": [
             "http://outlook.com/"
@@ -49,7 +49,7 @@
     },
     {
         "name": "Overclockers",
-        "preview": "OC.jpg",
+        "preview": "./src/img/OC.jpg",
         "description": "Hardware, software news",
         "links": [
             "http://overclockers.ua"
@@ -57,7 +57,7 @@
     },
     {
         "name": "LEZ",
-        "preview": "lez-logo.png",
+        "preview": "./src/img/lez-logo.png",
         "description": "Home",
         "links": [
             "https://my.lez.com.ua/"
@@ -65,7 +65,7 @@
     },
     {
         "name": "Office",
-        "preview": "office.png",
+        "preview": "./src/img/office.png",
         "description": "Office",
         "links": [
             "https://www.office.com/?auth=1"
@@ -73,7 +73,7 @@
     },
     {
         "name": "ChatGPT",
-        "preview": "chatGPT.svg",
+        "preview": "./src/img/chatGPT.svg",
         "description": "Code",
         "links": [
             "https://chat.openai.com/"
@@ -101,12 +101,6 @@
         "name": "Other",
         "type": "folder",
         "hidden": false,
-        "listName": "other"
-    },
-    {
-        "name": "",
-        "type": "addCustom",
-        "preview": "add.png",
         "listName": "other"
     }
 ]

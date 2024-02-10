@@ -1,7 +1,7 @@
 [
     {
         "name": "Exercism",
-        "preview": "exercism.png",
+        "preview": "./src/img/exercism.png",
         "description": "Code",
         "links": [
             "https://exercism.org/tracks/javascript"
@@ -9,7 +9,7 @@
     },
     {
         "name": "Codewars",
-        "preview": "codewars.svg",
+        "preview": "./src/img/codewars.svg",
         "description": "Code",
         "links": [
             "https://www.codewars.com/dashboard"
@@ -17,7 +17,7 @@
     },
     {
         "name": "javascript.info",
-        "preview": "js.png",
+        "preview": "./src/img/js.png",
         "description": "Code",
         "links": [
             "https://uk.javascript.info/"
@@ -25,7 +25,7 @@
     },
     {
         "name": "Excalidraw",
-        "preview": "excalidraw.webp",
+        "preview": "./src/img/excalidraw.webp",
         "description": "Draw",
         "links": [
             "https://excalidraw.com/"
@@ -33,7 +33,7 @@
     },
     {
         "name": "Regex101",
-        "preview": "regex101.png",
+        "preview": "./src/img/regex101.png",
         "description": "Code",
         "links": [
             "https://regex101.com"

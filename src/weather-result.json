@@ -1,4 +1,10 @@
 {
+    add: {
+        "name": "",
+        "type": "addCustom",
+        "preview": "add.png",
+        "listName": "other"
+    },
     "lat": 49.171,
     "lon": 23.1726,
     "timezone": "Europe/Kiev",
