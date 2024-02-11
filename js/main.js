@@ -1,6 +1,9 @@
 const MAIN_LIST_NAME = "links-list";
+const CUR_VERSION = 1;
+const MIN_VERSION = 1;
 let SHOW_HIDDEN = false; // localStorage.getItem("SHOW_HIDDEN") === "true";
-if (localStorage.length === 0) {
+if (localStorage.length === 0 || +localStorage.getItem("ver") < MIN_VERSION) {
+  console.log("loading data...");
   let jsonName = MAIN_LIST_NAME;
   saveLinksToLocalStorage(jsonName, () => {
     let list = JSON.parse(localStorage.getItem(jsonName));
@@ -11,6 +14,7 @@ if (localStorage.length === 0) {
         );
     });
   });
+  localStorage.setItem("ver", CUR_VERSION);
 }
 //////////////////////////////////////////
 //////   READ LINKS FROM JSON        /////
