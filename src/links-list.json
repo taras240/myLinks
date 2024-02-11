@@ -80,27 +80,23 @@
         ]
     },
     {
-        "name": "Code",
+        "name": "code",
         "type": "folder",
-        "hidden": false,
-        "listName": "code"
+        "hidden": false
     },
     {
-        "name": "Porn",
+        "name": "porn",
         "type": "folder",
-        "hidden": true,
-        "listName": "porn"
+        "hidden": true
     },
     {
-        "name": "Shopping",
+        "name": "shopping",
         "type": "folder",
-        "hidden": false,
-        "listName": "shopping"
+        "hidden": false
     },
     {
-        "name": "Other",
+        "name": "other",
         "type": "folder",
-        "hidden": false,
-        "listName": "other"
+        "hidden": false
     }
 ]

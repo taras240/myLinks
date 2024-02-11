@@ -21,3 +21,67 @@ const headerWeatherPrev = document.querySelector(".header-weather_prev");
 
 const searchContainer = document.querySelector(".search-bar_container");
 const searchBar = document.querySelector("#search-bar");
+
+const generateCreationFormHtml = ({
+  headerText = "Створити елемент",
+  elementNameText = "",
+  elementUrl = "",
+  isLink = true,
+  isHidden = false,
+  iconUrl = "",
+  elentDescription = "",
+  isEditing = false,
+  elementIndex,
+}) => `
+    
+        <h2 class="creation-header">${headerText}</h2>
+        <button class="close-creation_button" onclick="closeCreation()">X</button>
+        <div class="creation-form">
+            <div class="">
+                <input type="text" placeholder="Назва елемента" id="new-element-label" name="elementLabel" value="${elementNameText}">
+            </div>
+
+        <div class="element-type-selection">
+            <div>
+                <input type="radio" class="radio-link-type" id="link" name="element-type" value="link" ${
+                  isLink ? "checked" : ""
+                }>
+                <label for="link">Посилання</label>
+                <input type="text" placeholder="https://..........." id="new-element-url" name="link-url" value="${elementUrl}">
+            </div>
+            <div>
+                <input type="radio" class="radio-folder-type" id="folder" name="element-type" value="folder" ${
+                  !isLink ? "checked" : ""
+                }>
+                <label for="folder">Папка</label>
+            </div>
+            <div class="">
+                <input type="checkbox" id="new-element-visibility" name="visibility" value="hidden" ${
+                  isHidden ? "checked" : ""
+                }>
+                <label for="new-element-visibility">Прихований</label>
+            </div>
+        </div>
+        <div class="">
+            <input type="text" placeholder="Посилання на значок" id="new-element-preview" name="preview-url" value="${iconUrl}">
+        </div>
+        <div class="">
+            <input type="text" placeholder="Опис" name="description" id="new-element-description" value="${elentDescription}">
+        </div>
+        <button id="saveElement" class="${
+          isEditing ? "hidden" : ""
+        }"  onclick="saveNewElement()">Зберегти</button>
+        <button id="saveElement" class="${
+          !isEditing ? "hidden" : ""
+        }"  onclick="saveExistingElement(${elementIndex})">Зберегти зміни</button>
+
+        </div>
+`;
+
+const generateContextMenuHtml = ({ title = "" }) => `
+    <h2 class="context-menu_header">${title}</h2>
+    <button class="edit-element_button context-button">Змінити</button>
+    <button disabled="" class="icon-element_button context-button">Змінити значок</button>
+    <button class="hide-element_button context-button">Приховати</button>
+    <button class="delete-element_button context-button">Видалити</button>
+`;
