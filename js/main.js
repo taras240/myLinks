@@ -9,9 +9,7 @@ if (localStorage.length === 0 || +localStorage.getItem("ver") < MIN_VERSION) {
     let list = JSON.parse(localStorage.getItem(jsonName));
     list?.forEach((link) => {
       if (link.type === "folder")
-        saveLinksToLocalStorage(link.listName, () =>
-          console.log(link.listName)
-        );
+        saveLinksToLocalStorage(link.listName, () => console.log("."));
     });
     updateLinksList();
   });
