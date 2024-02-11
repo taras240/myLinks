@@ -13,6 +13,7 @@ if (localStorage.length === 0 || +localStorage.getItem("ver") < MIN_VERSION) {
           console.log(link.listName)
         );
     });
+    updateLinksList();
   });
   localStorage.setItem("ver", CUR_VERSION);
 }
