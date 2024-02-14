@@ -22,6 +22,14 @@ const headerWeatherPrev = document.querySelector(".header-weather_prev");
 const searchContainer = document.querySelector(".search-bar_container");
 const searchBar = document.querySelector("#search-bar");
 
+const generateFolderFormHtml = ({ folderName = "folder" }) => `
+
+    <h2 class="folder-header">${folderName}</h2>
+    <div class="folder-links"></div>
+    <button class="close-folder_button" onclick="closeFolder()">X</button>
+
+`;
+
 const generateCreationFormHtml = ({
   headerText = "Створити елемент",
   elementNameText = "",
@@ -85,3 +93,28 @@ const generateContextMenuHtml = ({ title = "" }) => `
     <button class="hide-element_button context-button">Приховати</button>
     <button class="delete-element_button context-button">Видалити</button>
 `;
+
+const generateLinkElementHtml = ({
+  link = "",
+  linkPreview = "",
+  linkName = "",
+}) => `
+    <a class="link-main-information" ${link ? 'href="' + link + '"' : ""}>
+    <img class="link-preview" src="${
+      linkPreview ? linkPreview : "./src/img/link.png"
+    }" alt=""></img>
+    <div class="link-name">${linkName}</div>       
+    </a>
+`;
+const generateAddNewLinkElement = (listName) => {
+  let creationElement = document.createElement("div");
+  creationElement.className = "creation-card";
+  creationElement.innerHTML = generateLinkElementHtml({
+    linkPreview: "./src/img/add.png",
+    linkName: "Додати",
+  });
+  creationElement.addEventListener("click", () => {
+    openCreation(listName);
+  });
+  return creationElement;
+};

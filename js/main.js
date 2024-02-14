@@ -1,20 +1,25 @@
 const MAIN_LIST_NAME = "links-list";
 const CUR_VERSION = 1;
 const MIN_VERSION = 1;
-let SHOW_HIDDEN = false; // localStorage.getItem("SHOW_HIDDEN") === "true";
-if (localStorage.length === 0 || +localStorage.getItem("ver") < MIN_VERSION) {
-  let jsonName = MAIN_LIST_NAME;
-  saveLinksToLocalStorage(jsonName, () => {
-    let list = JSON.parse(localStorage.getItem(jsonName));
-    list?.forEach((link) => {
-      if (link.type === "folder")
-        saveLinksToLocalStorage(link.name, () => console.log("."));
-    });
-    updateLinksList();
-  });
-  localStorage.setItem("ver", CUR_VERSION);
-}
+let SHOW_HIDDEN = false;
+
+checkCompatibility();
 openLinkList(MAIN_LIST_NAME, linksContainer);
+
+function checkCompatibility() {
+  if (localStorage.length === 0 || +localStorage.getItem("ver") < MIN_VERSION) {
+    let jsonName = MAIN_LIST_NAME;
+    saveLinksToLocalStorage(jsonName, () => {
+      let list = JSON.parse(localStorage.getItem(jsonName));
+      list?.forEach((link) => {
+        if (link.type === "folder")
+          saveLinksToLocalStorage(link.name, () => console.log("."));
+      });
+      updateLinksList();
+    });
+    localStorage.setItem("ver", CUR_VERSION);
+  }
+}
 //////////////////////////////////////////
 //////   READ LINKS FROM JSON        /////
 //////////////////////////////////////////
@@ -28,34 +33,29 @@ function readLinksFromJSON({ jsonName, container }) {
 }
 
 function parseElement({ showHidden = SHOW_HIDDEN, link, listName, index = 1 }) {
-  switch (link.type) {
-    case "folder":
-      return makeFolderElement(link, index, listName);
-    case "addCustom":
-      return makeCustomElement();
-    default:
-      return makeLinkElement(link, index, listName);
-  }
+  return makeElement(link, index, listName);
 }
-function makeLinkElement(link, index, listName) {
-  let linkElement = document.createElement("div");
-  linkElement.className = "link-card";
-  linkElement.setAttribute("data-index", index);
-  linkElement.setAttribute("data-folder", listName);
-  if (!SHOW_HIDDEN && link.hidden === true) {
-    linkElement.classList.add("hidden");
-  }
-  linkElement.setAttribute("data-private", Boolean(link.hidden));
 
-  linkElement.innerHTML = `
-        <a class="link-main-information" href="${link.links[0]}">
-        <img class="link-preview" src="${
-          link.preview ? link.preview : "./src/img/link.png"
-        }" alt=""></img>
-        <div class="link-name">${link.name}</div>       
-    </a>
-    `;
-  linkElement.addEventListener("contextmenu", (event) => {
+function makeElement(link, index, listName) {
+  let element = document.createElement("div");
+  let type = link.type === "folder" ? "folder" : "link";
+  element.className = link.type === "folder" ? "folder-card" : "link-card";
+  element.setAttribute("data-index", index);
+  element.setAttribute("data-folder", listName);
+  if (!SHOW_HIDDEN && link.hidden === true) {
+    element.classList.add("hidden");
+  }
+  element.setAttribute("data-private", Boolean(link.hidden));
+  element.innerHTML = generateLinkElementHtml({
+    link: type === "link" ? link?.links[0] : "",
+    linkPreview: link.preview
+      ? link.preview
+      : link.type === "folder"
+      ? "./src/img/folde.png"
+      : "",
+    linkName: link.name,
+  });
+  element.addEventListener("contextmenu", (event) => {
     event.preventDefault();
     showContextMenu({
       posX: event.clientX,
@@ -65,55 +65,15 @@ function makeLinkElement(link, index, listName) {
       listName: listName,
     });
   });
-  return linkElement;
-}
-function makeFolderElement(folder, index, listName) {
-  let folderElement = document.createElement("div");
-  folderElement.className = "folder-card";
-  folderElement.setAttribute("data-index", index);
-  folderElement.setAttribute("data-folder", listName);
-
-  if (!SHOW_HIDDEN && folder.hidden === true) {
-    folderElement.classList.add("hidden");
-  }
-  folderElement.setAttribute("data-private", folder.hidden);
-  folderElement.innerHTML = `
-        <a class="link-main-information">
-        <img class="link-preview" src="${
-          folder.preview ? folder.preview : "./src/img/folde.png"
-        }" alt=""></img>
-        <div class="link-name">${folder.name}</div>       
-    </a>
-    `;
-  folderElement.addEventListener("click", () => {
-    openFoler(folder);
-  });
-  folderElement.addEventListener("contextmenu", (event) => {
-    event.preventDefault();
-    showContextMenu({
-      posX: event.clientX,
-      posY: event.clientY,
-      item: folder,
-      event: event,
-      listName: listName,
-    });
-  });
-  return folderElement;
+  type === "folder"
+    ? element.addEventListener("click", () => {
+        openFoler(link);
+      })
+    : "";
+  return element;
 }
 function makeCustomElement(listName) {
-  let creationElement = document.createElement("div");
-  creationElement.className = "creation-card";
-  // creationElement.setAttribute("list-name", listName);
-  creationElement.innerHTML = `
-        <a class="link-main-information">
-        <img class="link-preview" src="./src/img/add.png" alt=""></img>   
-        <div class="link-name">Create element</div>           
-    </a>    
-    `;
-  creationElement.addEventListener("click", () => {
-    openCreation(listName);
-  });
-  return creationElement;
+  return generateAddNewLinkElement(listName);
 }
 
 function saveLinksToLocalStorage(jsonName, fun) {
@@ -127,13 +87,6 @@ function saveLinksToLocalStorage(jsonName, fun) {
 function openLinkList(linksListName, container) {
   readLinksFromJSON({ jsonName: linksListName, container: container });
   container.appendChild(makeCustomElement(linksListName));
-  // if (!localStorage.getItem(linksListName)) {
-  //   saveLinksToLocalStorage(linksListName, () =>
-  //     readLinksFromJSON({ jsonName: linksListName, container: container })
-  //   );
-  // } else {
-  //   readLinksFromJSON({ jsonName: linksListName, container: container });
-  // }
 }
 
 //////////////////////////////////////////////
@@ -143,7 +96,7 @@ function openLinkList(linksListName, container) {
 /// PRESS SOME BUTTON EVENTS       ///////////
 document.addEventListener("keydown", (e) => {
   switch (e.code) {
-    case "NumLock":
+    case "KeyP":
       SHOW_HIDDEN = !SHOW_HIDDEN;
       localStorage.setItem("SHOW_HIDDEN", SHOW_HIDDEN);
       let hiddenElements = document.querySelectorAll("[data-private = 'true']");
@@ -152,7 +105,6 @@ document.addEventListener("keydown", (e) => {
           ? el.classList.remove("hidden")
           : el.classList.add("hidden");
       });
-      break;
     default:
       // console.log(e.code);
       break;
@@ -199,7 +151,7 @@ function saveNewElement() {
     type: document.querySelector(".radio-link-type").checked
       ? "link"
       : "folder",
-    // hidden: document.querySelector("new-element-visibility").checked,
+    hidden: document.querySelector("#new-element-visibility").checked,
   };
   if (verifyNewElementData(newElement, listName)) {
     addNewElementToList(newElement, listName);
@@ -225,14 +177,11 @@ function verifyNewElementData(element, listName) {
   }
 }
 
-////////////////////////////////////////////
-/////   ADDITIONAL FUNCTIONS     ///////////
-////////////////////////////////////////////
-
 ////   OPEN / CLOSE FOLDER    //////////////////////
 function openFoler(folder) {
   closeFolder();
   closeCreation();
+
   if (!folderContainer.classList.contains("active")) {
     document.querySelector(".folder-header").innerText = folder.name;
     folderContainer.classList.add("active");
@@ -251,7 +200,6 @@ function openCreation(listName) {
   closeCreation();
   creationContainer.classList.add("active");
   creationContainer.setAttribute("list-name", listName);
-
   creationContainer.innerHTML = generateCreationFormHtml({
     headerText: "Створення нового елемента",
   });
