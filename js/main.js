@@ -381,13 +381,12 @@ document.querySelector("header").addEventListener("contextmenu", (event) => {
   >
     Відновити дані
   </button>
-  <input type="file" id="file-input" style="display: none" />
   <button
     class="export-data context-button"
     id="export-data"
     onclick="exportData()"
   >
-    Експортувати дані
+    Зберегти дані
 </button>
   `;
   document.querySelector("header").appendChild(exportMenu);
