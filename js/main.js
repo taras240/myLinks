@@ -325,3 +325,78 @@ function hideContextMenu() {
   menuElement?.remove();
 }
 document.addEventListener("click", () => hideContextMenu());
+function loadData() {
+  document.getElementById("file-input").click();
+  document.getElementById("file-input").addEventListener("change", function () {
+    console.log(this.files[0]);
+    let file = this.files[0];
+
+    const reader = new FileReader();
+    reader.onload = function () {
+      // Отримайте текстовий вміст файлу з FileReader-об'єкта
+      const textContent = JSON.parse(reader.result);
+      textContent.forEach((file) => {
+        localStorage.setItem(file.name, file.value);
+      });
+    };
+    // Прочитайте файл
+    reader.readAsText(file);
+  });
+}
+function exportData() {
+  let date = new Date().toLocaleDateString("uk-UA", {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  });
+  let localData = [];
+  Object.getOwnPropertyNames(localStorage).forEach((el) =>
+    localData.push({ name: el, value: localStorage.getItem(el) })
+  );
+
+  const text = JSON.stringify(localData);
+  const blob = new Blob([text], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `${date}-linksExport.json`;
+  link.click();
+
+  URL.revokeObjectURL(url);
+}
+document.querySelector("header").addEventListener("contextmenu", (event) => {
+  event.preventDefault();
+  hideContextMenu();
+  let exportMenu = document.createElement("div");
+  exportMenu.className = "export-menu contex-menu";
+  exportMenu.style.top = event.clientY + "px";
+  exportMenu.style.left = event.clientX + "px";
+  exportMenu.innerHTML = `
+  <h2 class="context-menu_header">Links</h2>
+  <button
+    class="load-data context-button"
+    id="load-data"
+    onclick="loadData()"
+  >
+    Відновити дані
+  </button>
+  <input type="file" id="file-input" style="display: none" />
+  <button
+    class="export-data context-button"
+    id="export-data"
+    onclick="exportData()"
+  >
+    Експортувати дані
+</button>
+  `;
+  document.querySelector("header").appendChild(exportMenu);
+  console.log("header");
+  // showContextMenu({
+  //   posX: event.clientX,
+  //   posY: event.clientY,
+  //   item: link,
+  //   event: event,
+  //   listName: listName,
+  // });
+});
