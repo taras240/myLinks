@@ -46,6 +46,9 @@ header {
   background-color: var(--header-color);
 }
 .header_container {
+  max-width: 1200px;
+  padding: 10px;
+  margin: auto;
   display: flex;
   flex-direction: row;
   align-items: center;
