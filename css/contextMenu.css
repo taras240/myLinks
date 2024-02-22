@@ -9,9 +9,9 @@
   font-size: 1.5rem;
   min-width: 120px;
   min-height: 40px;
-
   border-radius: 10px;
-  overflow: hidden;
+  box-shadow: var(--black-shadow);
+  /* overflow: hidden; */
 }
 .context-menu_header {
   line-height: 3rem;
@@ -34,11 +34,26 @@
 .context-button:not(:last-child) {
   border-bottom: 1px solid var(--primary-color);
 }
+.context-button:last-child {
+  border-radius: 0 0 10px 10px;
+}
 .context-button.delete-element_button {
-  color: red;
+  color: var(--red-color);
+  border-radius: 0 0 10px 10px;
 }
 .context-button:hover {
   background-color: var(--hover-color);
+  box-shadow: var(--hover-shadow);
+  /* font-weight: 600; */
+  color: black;
+  z-index: 2;
+  transition: 0.2s;
+}
+.context-button.delete-element_button:hover {
+  background-color: var(--hover-color);
+  box-shadow: var(--red-shadow);
+  background-color: var(--red-color);
+
   transition: 0.2s;
 }
 .context-button:disabled {

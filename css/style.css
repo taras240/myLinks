@@ -4,22 +4,26 @@
 @import url(background.css);
 @import url(clock.css);
 @import url(contextMenu.css);
-@font-face {
+/* @font-face {
   font-family: "Rubik";
   src: url("../src/font/Rubik-VariableFont_wght.ttf") format("truetype");
-}
+} */
 :root {
   --primary-color: rgb(47 56 63 / 75%);
   --hover-color: rgb(31, 71, 104);
   --background-color: rgb(23, 25, 58);
   --header-color: rgb(18, 28, 43);
+  --red-color: rgb(168 0 0);
   --bright-color: rgb(71 172 255);
+  --black-shadow: 3px 6px 19px 6px #0b0a0a;
+  --hover-shadow: 0px 2px 20px 1px var(--hover-color);
+  --red-shadow: 0px 2px 20px 1px var(--red-color);
 }
 body {
   /* background-image: url("../src/img/bg-dark.png"); */
   background-color: var(--background-color);
   background-repeat: repeat;
-  font-family: "Rubik";
+  font-family: "system-ui", sans-serif;
   user-select: none;
   height: 100vh;
   overflow-x: hidden;
@@ -161,7 +165,7 @@ main .main_container {
 
 .link-preview {
   flex: 1;
-  padding: 10px 0;
+  padding: 10px;
   height: 60px;
   border-radius: 10px;
   overflow: hidden;
@@ -203,16 +207,18 @@ main .main_container {
 .creator_container.active {
   visibility: visible;
   opacity: 1;
+  box-shadow: var(--black-shadow);
   transition: 0.2s;
 }
 .folder-header_container,
 .creation-header_container {
   display: flex;
   justify-content: space-between;
+  padding: 10px;
   align-items: center;
-  border-bottom: 2px solid var(--bright-color);
+  border-bottom: 1px solid var(--bright-color);
   border-radius: 10px 10px 0 0;
-  height: 35px;
+  /* height: 35px; */
   overflow: hidden;
 }
 .folder-header,
@@ -222,22 +228,44 @@ main .main_container {
   /* background-color: var(--hover-color); */
   color: var(--bright-color);
   font-size: 22px;
-  font-weight: 400;
+  line-height: 3rem;
+  font-weight: 600;
   /* line-height: 100%; */
   text-align: center;
 }
 .close-folder_button,
 .close-creation_button {
+  position: relative;
   background-color: red;
   opacity: 0.8;
   font-size: 22px;
   font-weight: 600;
-  width: 50px;
-  height: 100%;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
   transition: 0.2s;
+}
+.close-folder_button::before,
+.close-creation_button::before,
+.close-folder_button::after,
+.close-creation_button::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 70%;
+  height: 10%;
+  background-color: #0b0a0a;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotateZ(45deg);
+}
+.close-folder_button::after,
+.close-creation_button::after {
+  transform: translate(-50%, -50%) rotateZ(-45deg);
 }
 .close-folder_button:hover,
 .close-creation_button:hover {
+  box-shadow: var(--red-shadow);
   opacity: 1;
   transition: 0.2s;
 }
@@ -245,6 +273,7 @@ main .main_container {
   flex: 1;
   display: flex;
   flex-wrap: wrap;
+  gap: 10px;
   flex-direction: row;
   align-items: center;
   justify-content: center;

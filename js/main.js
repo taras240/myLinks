@@ -236,7 +236,7 @@ function verifyNewElementData(element, listName) {
 function openFoler(folder) {
   closeFolder();
   closeCreation();
-
+  hideContextMenu();
   if (!folderContainer.classList.contains("active")) {
     document.querySelector(".folder-header").innerText = folder.name;
     folderContainer.classList.add("active");
@@ -253,6 +253,7 @@ function closeFolder() {
 function openCreation(listName) {
   closeFolder();
   closeCreation();
+  hideContextMenu();
   creationContainer.classList.add("active");
   creationContainer.setAttribute("list-name", listName);
   creationContainer.innerHTML = generateCreationFormHtml({

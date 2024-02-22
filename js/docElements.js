@@ -44,7 +44,7 @@ const generateCreationFormHtml = ({
 }) => `
         <div class="creation-header_container">
           <h2 class="creation-header">${headerText}</h2>
-          <button class="close-creation_button" onclick="closeCreation()">X</button>
+          <button class="close-creation_button" onclick="closeCreation()"></button>
         </div>
         <div class="creation-form">
             <div class="">
