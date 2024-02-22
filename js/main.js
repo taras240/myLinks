@@ -59,6 +59,7 @@ function makeElement({ link, index, listName, parentContainer }) {
     linkName: link.name,
   });
   element.addEventListener("contextmenu", (event) => {
+    event.stopPropagation();
     event.preventDefault();
     showContextMenu({
       posX: event.clientX,
@@ -82,7 +83,8 @@ function makeElement({ link, index, listName, parentContainer }) {
     parentContainer.classList.remove("draggable-container");
   });
   type === "folder"
-    ? element.addEventListener("click", () => {
+    ? element.addEventListener("click", (e) => {
+        e.stopPropagation();
         openFoler(link);
       })
     : "";
@@ -206,6 +208,7 @@ function saveNewElement() {
     hidden: document.querySelector("#new-element-visibility").checked,
   };
   if (verifyNewElementData(newElement, listName)) {
+    closeCreation();
     addNewElementToList(newElement, listName);
     if (newElement.type === "folder") {
       localStorage.setItem(newElement.name, "[]");
@@ -369,7 +372,18 @@ function hideContextMenu() {
   let menuElement = document.querySelector(".contex-menu");
   menuElement?.remove();
 }
-document.addEventListener("click", () => hideContextMenu());
+document.addEventListener("click", () => {
+  hideContextMenu();
+  // console.log("click");
+  // closeCreation();
+  closeFolder();
+});
+document.addEventListener("contextmenu", (e) => {
+  e.preventDefault();
+  hideContextMenu();
+  let exportMenu = generateExportMenuElement();
+  document.querySelector("header").appendChild(exportMenu);
+});
 function loadData() {
   document.getElementById("file-input").click();
   document.getElementById("file-input").addEventListener("change", function () {
@@ -411,29 +425,6 @@ function exportData() {
 }
 document.querySelector("header").addEventListener("contextmenu", (event) => {
   event.preventDefault();
-  hideContextMenu();
-  let exportMenu = document.createElement("div");
-  exportMenu.className = "export-menu contex-menu";
-  exportMenu.style.top = event.clientY + "px";
-  exportMenu.style.left = event.clientX + "px";
-  exportMenu.innerHTML = `
-  <h2 class="context-menu_header">Links</h2>
-  <button
-    class="load-data context-button"
-    id="load-data"
-    onclick="loadData()"
-  >
-    Відновити дані
-  </button>
-  <button
-    class="export-data context-button"
-    id="export-data"
-    onclick="exportData()"
-  >
-    Зберегти дані
-</button>
-  `;
-  document.querySelector("header").appendChild(exportMenu);
 
   // showContextMenu({
   //   posX: event.clientX,

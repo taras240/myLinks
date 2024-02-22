@@ -24,9 +24,10 @@ const searchBar = document.querySelector("#search-bar");
 
 const generateFolderFormHtml = ({ folderName = "folder" }) => `
 
-    <h2 class="folder-header">${folderName}</h2>
+    <h2 class="folder-header">${folderName}
+      <button class="close-folder_button" onclick="closeFolder()">X</button>
+    </h2>
     <div class="folder-links"></div>
-    <button class="close-folder_button" onclick="closeFolder()">X</button>
 
 `;
 
@@ -41,9 +42,10 @@ const generateCreationFormHtml = ({
   isEditing = false,
   elementIndex,
 }) => `
-    
-        <h2 class="creation-header">${headerText}</h2>
-        <button class="close-creation_button" onclick="closeCreation()">X</button>
+        <div class="creation-header_container">
+          <h2 class="creation-header">${headerText}</h2>
+          <button class="close-creation_button" onclick="closeCreation()">X</button>
+        </div>
         <div class="creation-form">
             <div class="">
                 <input type="text" placeholder="Назва елемента" id="new-element-label" name="elementLabel" value="${elementNameText}">
@@ -113,8 +115,33 @@ const generateAddNewLinkElement = (listName) => {
     linkPreview: "./src/img/add.png",
     linkName: "Додати",
   });
-  creationElement.addEventListener("click", () => {
+  creationElement.addEventListener("click", (e) => {
+    e.stopPropagation();
     openCreation(listName);
   });
   return creationElement;
+};
+const generateExportMenuElement = () => {
+  let exportMenu = document.createElement("div");
+  exportMenu.className = "export-menu contex-menu";
+  exportMenu.style.top = event.clientY + "px";
+  exportMenu.style.left = event.clientX + "px";
+  exportMenu.innerHTML = `
+  <h2 class="context-menu_header">Links</h2>
+  <button
+    class="load-data context-button"
+    id="load-data"
+    onclick="loadData()"
+  >
+    Відновити дані
+  </button>
+  <button
+    class="export-data context-button"
+    id="export-data"
+    onclick="exportData()"
+  >
+    Зберегти дані
+</button>
+  `;
+  return exportMenu;
 };

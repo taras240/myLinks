@@ -13,6 +13,7 @@
   --hover-color: rgb(31, 71, 104);
   --background-color: rgb(23, 25, 58);
   --header-color: rgb(18, 28, 43);
+  --bright-color: rgb(71 172 255);
 }
 body {
   /* background-image: url("../src/img/bg-dark.png"); */
@@ -104,7 +105,7 @@ main .main_container {
 }
 .links-container.draggable-container,
 .folder-links.draggable-container {
-  border: 2px dashed red;
+  border: 2px dashed var(--hover-color);
   cursor: pointer;
   -webkit-user-drag: element;
 }
@@ -204,27 +205,35 @@ main .main_container {
   opacity: 1;
   transition: 0.2s;
 }
+.folder-header_container,
+.creation-header_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--bright-color);
+  border-radius: 10px 10px 0 0;
+  height: 35px;
+  overflow: hidden;
+}
 .folder-header,
 .creation-header {
+  justify-self: center;
   width: 100%;
-  background-color: var(--hover-color);
-  color: aliceblue;
+  /* background-color: var(--hover-color); */
+  color: var(--bright-color);
   font-size: 22px;
-  font-weight: 600;
-  line-height: 30px;
+  font-weight: 400;
+  /* line-height: 100%; */
   text-align: center;
 }
 .close-folder_button,
 .close-creation_button {
-  position: absolute;
   background-color: red;
   opacity: 0.8;
   font-size: 22px;
   font-weight: 600;
   width: 50px;
-  height: 30px;
-  top: 0;
-  right: 0;
+  height: 100%;
   transition: 0.2s;
 }
 .close-folder_button:hover,

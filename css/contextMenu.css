@@ -15,8 +15,12 @@
 }
 .context-menu_header {
   line-height: 3rem;
+  color: var(--bright-color);
+  border-bottom: 1px solid var(--bright-color);
   font-weight: 600;
   padding: 5px 5px;
+  width: 100%;
+  text-align: center;
 }
 .context-button {
   padding: 0 10px;
