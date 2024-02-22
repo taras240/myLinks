@@ -72,7 +72,10 @@ main .main_container {
   align-items: center;
   justify-content: center;
   padding: 10px 0;
+  border: 2px dashed transparent;
+  border-radius: 10px;
 }
+
 .weather_container {
   margin-bottom: 25px;
   display: flex;
@@ -98,6 +101,24 @@ main .main_container {
   color: rgb(202, 202, 202);
   /* background-color: var(--primary-color); */
   transition: 0.2s;
+}
+.links-container.draggable-container,
+.folder-links.draggable-container {
+  border: 2px dashed red;
+  cursor: pointer;
+  -webkit-user-drag: element;
+}
+.link-card.dragging,
+.folder-card.dragging {
+  border-color: red;
+  border-style: dashed;
+  cursor: grab;
+  -webkit-user-drag: element;
+}
+.link-card.dragging:active,
+.folder-card.dragging:active {
+  cursor: grab;
+  -webkit-user-drag: element;
 }
 .folder_container .link-card {
   background-color: transparent;
@@ -171,7 +192,6 @@ main .main_container {
   width: 50vw;
   margin: 0 auto;
   border-radius: 10px;
-  /* border: 2px solid rgba(255, 255, 255, 0.699); */
   background-color: rgb(0, 0, 0);
   padding: 0;
   visibility: hidden;
@@ -219,7 +239,10 @@ main .main_container {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin: 30px 20px;
+  margin: 10px 10px;
+  padding: 10px;
+  border: 2px solid transparent;
+  border-radius: 10px;
 }
 
 .creation-form {

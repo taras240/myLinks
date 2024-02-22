@@ -1,5 +1,5 @@
 const MAIN_LIST_NAME = "links-list";
-const CUR_VERSION = 1;
+const CUR_VERSION = 1.2;
 const MIN_VERSION = 1;
 let SHOW_HIDDEN = false;
 
@@ -27,21 +27,24 @@ function checkCompatibility() {
 function readLinksFromJSON({ jsonName, container }) {
   let jsonElements = JSON.parse(localStorage.getItem(jsonName));
   jsonElements?.forEach((link, i) => {
-    let element = parseElement({ link: link, index: i, listName: jsonName });
+    let element = makeElement({
+      link: link,
+      index: i,
+      listName: jsonName,
+      parentContainer: container,
+    });
     element ? container.appendChild(element) : "";
   });
 }
 
-function parseElement({ showHidden = SHOW_HIDDEN, link, listName, index = 1 }) {
-  return makeElement(link, index, listName);
-}
-
-function makeElement(link, index, listName) {
+function makeElement({ link, index, listName, parentContainer }) {
   let element = document.createElement("div");
   let type = link.type === "folder" ? "folder" : "link";
   element.className = link.type === "folder" ? "folder-card" : "link-card";
+  element.classList.add("draggable");
   element.setAttribute("data-index", index);
   element.setAttribute("data-folder", listName);
+  element.setAttribute("draggable", "true");
   if (!SHOW_HIDDEN && link.hidden === true) {
     element.classList.add("hidden");
   }
@@ -65,6 +68,19 @@ function makeElement(link, index, listName) {
       listName: listName,
     });
   });
+  element.addEventListener("dragstart", () => {
+    parentContainer.classList.add("draggable-container");
+    element.classList.add("dragging");
+  });
+  element.addEventListener("dragend", () => {
+    element.classList.remove("dragging");
+    changeElementPositionInList({
+      element: element,
+      link: link,
+      listName: listName,
+    });
+    parentContainer.classList.remove("draggable-container");
+  });
   type === "folder"
     ? element.addEventListener("click", () => {
         openFoler(link);
@@ -72,6 +88,7 @@ function makeElement(link, index, listName) {
     : "";
   return element;
 }
+
 function makeCustomElement(listName) {
   return generateAddNewLinkElement(listName);
 }
@@ -87,6 +104,22 @@ function saveLinksToLocalStorage(jsonName, fun) {
 function openLinkList(linksListName, container) {
   readLinksFromJSON({ jsonName: linksListName, container: container });
   container.appendChild(makeCustomElement(linksListName));
+  container.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    if (!container.classList.contains("draggable-container")) return;
+    else {
+      const afterElement = getDragAfterElement(container, e.clientX, e.clientY);
+      const draggable = document.querySelector(".dragging");
+      if (afterElement == null) {
+        container.insertBefore(
+          draggable,
+          container.querySelector(".creation-card")
+        );
+      } else {
+        container.insertBefore(draggable, afterElement);
+      }
+    }
+  });
 }
 
 //////////////////////////////////////////////
@@ -127,6 +160,7 @@ function removeElementByIndex(index, listName, folder) {
   }
   updateLinksList(listName);
 }
+
 function addNewElementToList(element, listName) {
   let curList = JSON.parse(localStorage.getItem(listName));
   curList.push(element);
@@ -139,6 +173,24 @@ function updateLinksList(listName = MAIN_LIST_NAME) {
   } else {
     openFoler({ name: listName });
   }
+}
+function changeElementPositionInList({ element, listName, link }) {
+  let prevPos = +element.dataset.index;
+  let newPos;
+  if (listName === MAIN_LIST_NAME) {
+    newPos = [...linksContainer.querySelectorAll(`[class*="card"]`)].indexOf(
+      element
+    );
+  } else {
+    newPos = [
+      ...folderLinkContainer.querySelectorAll(`[class*="card"]`),
+    ].indexOf(element);
+  }
+  let tempList = JSON.parse(localStorage.getItem(listName));
+  tempList.splice(prevPos, 1);
+  tempList.splice(newPos, 0, link);
+  localStorage.setItem(listName, JSON.stringify(tempList));
+  updateLinksList(listName);
 }
 
 function saveNewElement() {
@@ -295,13 +347,6 @@ function changeElementByIndex({ index, listName }) {
     listName: listName,
     elementIndex: index,
   });
-
-  console.log(element);
-
-  // curList[index].name = "new name";
-
-  // localStorage.setItem(listName, JSON.stringify(curList));
-  // updateLinksList(listName);
 }
 function openCreationForChange({ element, listName, elementIndex }) {
   closeFolder();
@@ -328,7 +373,6 @@ document.addEventListener("click", () => hideContextMenu());
 function loadData() {
   document.getElementById("file-input").click();
   document.getElementById("file-input").addEventListener("change", function () {
-    console.log(this.files[0]);
     let file = this.files[0];
 
     const reader = new FileReader();
@@ -390,7 +434,7 @@ document.querySelector("header").addEventListener("contextmenu", (event) => {
 </button>
   `;
   document.querySelector("header").appendChild(exportMenu);
-  console.log("header");
+
   // showContextMenu({
   //   posX: event.clientX,
   //   posY: event.clientY,
@@ -399,3 +443,45 @@ document.querySelector("header").addEventListener("contextmenu", (event) => {
   //   listName: listName,
   // });
 });
+
+function getDragAfterElement(container, x, y) {
+  const draggableElements = [
+    ...container.querySelectorAll(".draggable:not(.dragging)"),
+  ];
+  return draggableElements.reduce(
+    (closest, child, index) => {
+      const box = child.getBoundingClientRect();
+      const nextBox =
+        draggableElements[index + 1] &&
+        draggableElements[index + 1].getBoundingClientRect();
+      const inRow = y - box.bottom <= 0 && y - box.top >= 0; // check if this is in the same row
+      const offset = x - (box.left + box.width / 2);
+      if (inRow) {
+        if (offset < 0 && offset > closest.offset) {
+          return {
+            offset: offset,
+            element: child,
+          };
+        } else {
+          if (
+            // handle row ends,
+            nextBox && // there is a box after this one.
+            y - nextBox.top <= 0 && // the next is in a new row
+            closest.offset === Number.NEGATIVE_INFINITY // we didn't find a fit in the current row.
+          ) {
+            return {
+              offset: 0,
+              element: draggableElements[index + 1],
+            };
+          }
+          return closest;
+        }
+      } else {
+        return closest;
+      }
+    },
+    {
+      offset: Number.NEGATIVE_INFINITY,
+    }
+  ).element;
+}
