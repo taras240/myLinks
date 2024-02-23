@@ -29,11 +29,15 @@ function parseWeather(weatherJSON) {
     };
     weather.push(dayWeather);
   });
+  updateClockWeather(currentWeather);
   createHeaderWeather(currentWeather);
   createWeatherCards(weather);
 }
+function updateClockWeather(weather) {
+  clockWeatherContainer.innerText = `${weather.weather}, ${weather.temp}`;
+}
 function createHeaderWeather(currentWeather) {
-  headerTemp.innerText = currentWeather.temp;
+  // headerTemp.innerText = currentWeather.temp;
   headerWeatherPrev.setAttribute(
     "src",
     `https://openweathermap.org/img/wn/${currentWeather.iconName}@2x.png`

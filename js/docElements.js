@@ -1,7 +1,8 @@
 //////////////////////////////////////////
 //////   ELEMENTS INITIALIZATION     /////
 //////////////////////////////////////////
-const clockContainer = document.querySelector(".clock_container");
+const clockContainer = document.querySelector(".time-block");
+const clockWeatherContainer = document.querySelector(".weather-block");
 const linksContainer = document.querySelector(".links-container");
 const headerClock = document.querySelector("#header-clock");
 const folderContainer = document.querySelector(".folder_container");
