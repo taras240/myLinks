@@ -1,7 +1,25 @@
-const OWAK = "d079728d9385e995c4273bb215a58c03";
-const coord = { lat: 49.279041, lon: 23.297236 };
-let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${coord.lat}&lon=${coord.lon}&appid=${OWAK}&lang=ua&units=metric`;
-// let url = `http://api.openweathermap.org/data/2.5/forecast?id=${city_IDs.boryslav}&appid=${API_KEY}&lang=ua&units=metric`;
+let openWeatherConfig;
+if (localStorage.hasOwnProperty("openWeatherSettings")) {
+  openWeatherConfig = JSON.parse(localStorage.getItem("openWeatherSettings"));
+}
+
+function getOWUrl() {
+  let url = new URL("onecall", "https://api.openweathermap.org/data/2.5/");
+  // Параметри запиту
+  let params = {
+    lat: openWeatherConfig.lat,
+    lon: openWeatherConfig.lon,
+    appid: openWeatherConfig.API_KEY,
+    lang: "ua",
+    units: "metric",
+  };
+  // Додавання параметрів до URL
+  url.search = new URLSearchParams(params);
+  return url;
+  // let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${openWeatherConfig.lat}&lon=${openWeatherConfig.lon}&appid=${openWeatherConfig.API_KEY}&lang=ua&units=metric`;
+  // let url = `http://api.openweathermap.org/data/2.5/forecast?id=${city_IDs.boryslav}&appid=${API_KEY}&lang=ua&units=metric`;
+}
+
 let curDayNum = new Date().getDay();
 let weather = [];
 let currentWeather = {};
@@ -83,7 +101,7 @@ function createWeatherCards(weather) {
 }
 
 function getWeather() {
-  fetch(url)
+  fetch(getOWUrl())
     .then((resp) => resp.json())
     .then((respJSON) => parseWeather(respJSON));
 }

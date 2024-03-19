@@ -87,58 +87,41 @@ body {
   height: 200px;
 }
 .link-card,
-.folder-card,
 .creation-card {
   height: 90px;
   min-width: 110px;
-  /* margin: 5px auto 0; */
-  /* padding: 10px; */
   border-radius: 10px;
   border: 1px solid transparent;
   overflow: hidden;
   font-weight: 300;
   font-size: 20px;
   color: rgb(202, 202, 202);
-  /* background-color: var(--primary-color); */
-  /* transition: 0.2s; */
 }
-.links-container.draggable-container,
-.folder-links.draggable-container {
+.links-container.draggable-container {
   border: 2px dashed var(--hover-color);
   cursor: pointer;
 }
-/* .link-card.dragging,
-.folder-card.dragging {
+.link-card.dragging {
   border-color: red;
   border-style: dashed;
-  cursor: grab;
-  -webkit-user-drag: element;
-} */
-.link-card.dragging:active,
-.folder-card.dragging:active {
-  cursor: grab;
 }
+
 .folder_container .link-card {
   background-color: transparent;
 }
 .link-card:hover,
-.folder-card:hover,
 .creation-card:hover {
   border: 1px solid var(--hover-color);
-
-  /* background-color: var(--hover-color); */
   transition: 0.2s;
   color: rgb(255, 255, 255);
 }
-.link-card.hidden,
-.folder-card.hidden {
+.link-card.hidden {
   display: none;
   width: 0;
   height: 0;
   transition: 0.2s;
 }
-.link-card[data-private="true"],
-.folder-card[data-private="true"] {
+.link-card[data-private="true"] {
   background-color: var(--primary-color);
   transition: 0.2s;
 }
@@ -172,7 +155,6 @@ body {
   text-align: center;
 }
 .link-card:hover .link-name,
-.folder-card:hover .link-name,
 .creation-card:hover .link-name {
   background-color: var(--hover-color);
 }
@@ -218,55 +200,32 @@ body {
 .creation-header {
   justify-self: center;
   width: 100%;
-  /* background-color: var(--hover-color); */
   color: var(--bright-color);
   font-size: 22px;
   line-height: 3rem;
   font-weight: 600;
-  /* line-height: 100%; */
   text-align: center;
 }
 .close-folder_button,
 .close-creation_button {
   position: relative;
-  background-color: red;
-  opacity: 0.8;
-  font-size: 22px;
-  font-weight: 600;
+  background-color: transparent;
+  background-image: url(../src/img/close.svg);
+  background-size: cover;
+  opacity: 0.5;
   width: 30px;
   height: 30px;
-  border-radius: 100%;
   transition: 0.2s;
-}
-.close-folder_button::before,
-.close-creation_button::before,
-.close-folder_button::after,
-.close-creation_button::after {
-  content: "";
-  position: absolute;
-  display: block;
-  width: 70%;
-  height: 10%;
-  background-color: #0b0a0a;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotateZ(45deg);
-}
-.close-folder_button::after,
-.close-creation_button::after {
-  transform: translate(-50%, -50%) rotateZ(-45deg);
 }
 .close-folder_button:hover,
 .close-creation_button:hover {
-  box-shadow: var(--red-shadow);
   opacity: 1;
   transition: 0.2s;
 }
 .close-folder_button:active,
 .close-creation_button:active {
-  box-shadow: var(--red-shadow);
-  transform: scale(0.9);
-  opacity: 1;
+  transform: scale(0.8);
+  opacity: 0.8;
   transition: 0.2s;
 }
 .folder-links {

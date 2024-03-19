@@ -81,3 +81,6 @@ strong {
   font-style: normal;
   font-weight: 400;
 }
+img[src=""] {
+  display: none;
+}

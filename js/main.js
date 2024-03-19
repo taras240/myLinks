@@ -7,7 +7,7 @@ checkCompatibility();
 openLinkList(MAIN_LIST_NAME, linksContainer);
 
 function checkCompatibility() {
-  if (localStorage.length === 0 || +localStorage.getItem("ver") < MIN_VERSION) {
+  if (localStorage.length === 0 || localStorage.getItem("ver") != MIN_VERSION) {
     let jsonName = MAIN_LIST_NAME;
     saveLinksToLocalStorage(jsonName, () => {
       let list = JSON.parse(localStorage.getItem(jsonName));
