@@ -3,25 +3,33 @@ const CUR_VERSION = 2;
 const MIN_VERSION = 2;
 let SHOW_HIDDEN = false;
 
-checkCompatibility();
-openLinkList(MAIN_LIST_NAME, linksContainer);
+if (localIsGood()) {
+  openLinkList(MAIN_LIST_NAME, linksContainer);
+} else {
+  writeDefaultDataToLocal();
+}
 
-function checkCompatibility() {
-  if (localStorage.length === 0 || localStorage.getItem("ver") != MIN_VERSION) {
-    let jsonName = MAIN_LIST_NAME;
-    saveLinksToLocalStorage(jsonName, () => {
-      let list = JSON.parse(localStorage.getItem(jsonName));
-      list?.forEach((link) => {
-        if (link.type === "folder")
-          saveLinksToLocalStorage(link.name, () => console.log("."));
-      });
-      updateLinksList();
+function localIsGood() {
+  return (
+    localStorage.length > 0 &&
+    localStorage.getItem("ver") == MIN_VERSION &&
+    localStorage.getItem(MAIN_LIST_NAME)
+  );
+}
+
+function writeDefaultDataToLocal() {
+  saveLinksToLocalStorage(MAIN_LIST_NAME, () => {
+    let list = JSON.parse(localStorage.getItem(MAIN_LIST_NAME));
+    list?.forEach((link) => {
+      if (link.type === "folder")
+        saveLinksToLocalStorage(link.name, () => console.log("."));
     });
-    localStorage.setItem("ver", CUR_VERSION);
-  }
+    updateLinksList();
+  });
+  localStorage.setItem("ver", CUR_VERSION);
 }
 //////////////////////////////////////////
-//////   READ LINKS FROM JSON        /////
+//////!   READ LINKS FROM JSON        /////
 //////////////////////////////////////////
 
 function readLinksFromJSON({ jsonName, container }) {
@@ -107,7 +115,7 @@ function saveLinksToLocalStorage(jsonName, fun) {
 function openLinkList(linksListName, container) {
   readLinksFromJSON({ jsonName: linksListName, container: container });
   container.appendChild(makeCustomElement(linksListName));
-  let swiper = new Sortable(container, {
+  new Sortable(container, {
     animation: 150,
   });
 }
