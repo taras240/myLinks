@@ -1,6 +1,6 @@
 const MAIN_LIST_NAME = "links-list";
-const CUR_VERSION = 1.2;
-const MIN_VERSION = 1;
+const CUR_VERSION = 2;
+const MIN_VERSION = 2;
 let SHOW_HIDDEN = false;
 
 checkCompatibility();
@@ -38,9 +38,10 @@ function readLinksFromJSON({ jsonName, container }) {
 }
 
 function makeElement({ link, index, listName, parentContainer }) {
-  let element = document.createElement("div");
-  let type = link.type === "folder" ? "folder" : "link";
-  element.className = link.type === "folder" ? "folder-card" : "link-card";
+  let element = document.createElement("li");
+  let type = link.type ?? "link";
+  element.className = "link-card"; // link.type === "folder" ? "folder-card" :
+  element.dataset.type = type;
   element.classList.add("draggable");
   element.setAttribute("data-index", index);
   element.setAttribute("data-folder", listName);
@@ -50,7 +51,7 @@ function makeElement({ link, index, listName, parentContainer }) {
   }
   element.setAttribute("data-private", Boolean(link.hidden));
   element.innerHTML = generateLinkElementHtml({
-    link: type === "link" ? link?.links[0] : "",
+    link: type === "link" ? link?.href : "",
     linkPreview: link.preview
       ? link.preview
       : link.type === "folder"
@@ -106,26 +107,13 @@ function saveLinksToLocalStorage(jsonName, fun) {
 function openLinkList(linksListName, container) {
   readLinksFromJSON({ jsonName: linksListName, container: container });
   container.appendChild(makeCustomElement(linksListName));
-  container.addEventListener("dragover", (e) => {
-    e.preventDefault();
-    if (!container.classList.contains("draggable-container")) return;
-    else {
-      const afterElement = getDragAfterElement(container, e.clientX, e.clientY);
-      const draggable = document.querySelector(".dragging");
-      if (afterElement == null) {
-        container.insertBefore(
-          draggable,
-          container.querySelector(".creation-card")
-        );
-      } else {
-        container.insertBefore(draggable, afterElement);
-      }
-    }
+  let swiper = new Sortable(container, {
+    animation: 150,
   });
 }
 
 //////////////////////////////////////////////
-//////     ADD EVENTS LISTINERS     //////////
+//////!     ADD EVENTS LISTINERS     //////////
 //////////////////////////////////////////////
 
 /// PRESS SOME BUTTON EVENTS       ///////////
@@ -220,7 +208,7 @@ function verifyNewElementData(element, listName) {
   if (element.type === "link") {
     return (
       /.+/g.test(element.name) &&
-      /^(http)s{0,1}\:\/\/[^\s]+\.[^\s]+$/gi.test(element.links[0])
+      /^(http)s{0,1}\:\/\/[^\s]+\.[^\s]+$/gi.test(element.href)
     );
   }
   if (element.type === "folder") {
@@ -360,7 +348,7 @@ function openCreationForChange({ element, listName, elementIndex }) {
   creationContainer.innerHTML = generateCreationFormHtml({
     headerText: "Редагування елемента",
     elementNameText: element.name,
-    elementUrl: Array.isArray(element?.links) ? element?.links[0] : "",
+    elementUrl: Array.isArray(element?.links) ? element?.href : "",
     isLink: element.type !== "folder",
     isHidden: Boolean(element.hidden),
     iconUrl: element.preview,
@@ -394,12 +382,21 @@ function loadData() {
     reader.onload = function () {
       // Отримайте текстовий вміст файлу з FileReader-об'єкта
       const textContent = JSON.parse(reader.result);
+      let fileVer;
+      textContent.forEach((file) => {
+        if (file.name === "ver") fileVer = file.value;
+      });
+      if (fileVer != MIN_VERSION) {
+        console.error("links version error");
+        return;
+      }
       textContent.forEach((file) => {
         localStorage.setItem(file.name, file.value);
       });
     };
     // Прочитайте файл
     reader.readAsText(file);
+    setTimeout(() => updateLinksList(MAIN_LIST_NAME), 1000);
   });
 }
 function exportData() {
@@ -426,54 +423,4 @@ function exportData() {
 }
 document.querySelector("header").addEventListener("contextmenu", (event) => {
   event.preventDefault();
-
-  // showContextMenu({
-  //   posX: event.clientX,
-  //   posY: event.clientY,
-  //   item: link,
-  //   event: event,
-  //   listName: listName,
-  // });
 });
-
-function getDragAfterElement(container, x, y) {
-  const draggableElements = [
-    ...container.querySelectorAll(".draggable:not(.dragging)"),
-  ];
-  return draggableElements.reduce(
-    (closest, child, index) => {
-      const box = child.getBoundingClientRect();
-      const nextBox =
-        draggableElements[index + 1] &&
-        draggableElements[index + 1].getBoundingClientRect();
-      const inRow = y - box.bottom <= 0 && y - box.top >= 0; // check if this is in the same row
-      const offset = x - (box.left + box.width / 2);
-      if (inRow) {
-        if (offset < 0 && offset > closest.offset) {
-          return {
-            offset: offset,
-            element: child,
-          };
-        } else {
-          if (
-            // handle row ends,
-            nextBox && // there is a box after this one.
-            y - nextBox.top <= 0 && // the next is in a new row
-            closest.offset === Number.NEGATIVE_INFINITY // we didn't find a fit in the current row.
-          ) {
-            return {
-              offset: 0,
-              element: draggableElements[index + 1],
-            };
-          }
-          return closest;
-        }
-      } else {
-        return closest;
-      }
-    },
-    {
-      offset: Number.NEGATIVE_INFINITY,
-    }
-  ).element;
-}

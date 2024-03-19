@@ -3,100 +3,60 @@
         "name": "Youtube",
         "preview": "./src/img/youtube.png",
         "description": "Video, streams",
-        "links": [
-            "http://youtube.com/"
-        ]
+        "href": "http://youtube.com/"
     },
     {
         "name": "Twitch",
         "preview": "./src/img/twitch.png",
         "description": "Streams",
-        "links": [
-            "https://www.twitch.tv/"
-        ]
+        "href": "https://www.twitch.tv/"
     },
     {
         "name": "uakino",
         "preview": "",
         "description": "Films",
-        "links": [
-            "https://uakino.club/"
-        ]
+        "href": "https://uakino.club/"
     },
     {
         "name": "Facebook",
         "preview": "./src/img/Facebook_icon.svg",
         "description": "Social",
-        "links": [
-            "http://facebook.com"
-        ]
+        "href": "http://facebook.com"
     },
     {
         "name": "Twitter",
         "preview": "./src/img/Twitter.png",
         "description": "Social",
-        "links": [
-            "http://twitter.com"
-        ]
+        "href": "http://twitter.com"
     },
     {
         "name": "Outlook",
         "preview": "./src/img/outlook.webp",
         "description": "E-Mail",
-        "links": [
-            "http://outlook.com/"
-        ]
+        "href": "http://outlook.com/"
     },
     {
         "name": "Overclockers",
         "preview": "./src/img/OC.jpg",
         "description": "Hardware, software news",
-        "links": [
-            "http://overclockers.ua"
-        ]
+        "href": "http://overclockers.ua"
     },
     {
         "name": "LEZ",
         "preview": "./src/img/lez-logo.png",
         "description": "Home",
-        "links": [
-            "https://my.lez.com.ua/"
-        ]
+        "href": "https://my.lez.com.ua/"
     },
     {
         "name": "Office",
         "preview": "./src/img/office.png",
         "description": "Office",
-        "links": [
-            "https://www.office.com/?auth=1"
-        ]
+        "href": "https://www.office.com/?auth=1"
     },
     {
         "name": "ChatGPT",
         "preview": "./src/img/chatGPT.svg",
         "description": "Code",
-        "links": [
-            "https://chat.openai.com/"
-        ]
-    },
-    {
-        "name": "code",
-        "type": "folder",
-        "hidden": false
-    },
-    {
-        "name": "porn",
-        "type": "folder",
-        "hidden": true
-    },
-    {
-        "name": "shopping",
-        "type": "folder",
-        "hidden": false
-    },
-    {
-        "name": "other",
-        "type": "folder",
-        "hidden": false
+        "href": "https://chat.openai.com/"
     }
 ]

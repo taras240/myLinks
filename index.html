@@ -42,14 +42,14 @@
           </div>
         </div>
       </header>
-      <main>
+      <main class="main_container">
         <div class="clock_container container">
           <div class="time-block">14:18</div>
           <div class="weather-block">Хмарно</div>
         </div>
 
-        <div class="main_container container">
-          <div class="links-container"></div>
+        <div class="links_container container">
+          <ul class="links-container"></ul>
         </div>
         <div class="weather_container container"></div>
         <div class="folder_container container">
@@ -57,7 +57,7 @@
             <h2 class="folder-header">folder_name</h2>
             <button class="close-folder_button"></button>
           </div>
-          <div class="folder-links"></div>
+          <ul class="folder-links"></ul>
         </div>
         <div class="creator_container"></div>
       </main>
@@ -69,6 +69,7 @@
         </div>
       </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <script src="./js/docElements.js"></script>
     <script src="./js/time.js"></script>
 

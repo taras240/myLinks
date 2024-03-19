@@ -28,7 +28,7 @@ const generateFolderFormHtml = ({ folderName = "folder" }) => `
     <h2 class="folder-header">${folderName}
       <button class="close-folder_button" onclick="closeFolder()">X</button>
     </h2>
-    <div class="folder-links"></div>
+    <ul class="folder-links"></ul>
 
 `;
 
