@@ -197,7 +197,7 @@ function saveNewElement() {
     name: document.querySelector("#new-element-label").value,
     preview: document.querySelector("#new-element-preview").value,
     description: document.querySelector("#new-element-description").value,
-    links: [document.querySelector("#new-element-url").value],
+    href: document.querySelector("#new-element-url").value,
     type: document.querySelector(".radio-link-type").checked
       ? "link"
       : "folder",
