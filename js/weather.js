@@ -4,7 +4,7 @@ if (localStorage.hasOwnProperty("openWeatherSettings")) {
 }
 
 function getOWUrl() {
-  let url = new URL("onecall", "https://api.openweathermap.org/data/2.5/");
+  let url = new URL("onecall", "https://api.openweathermap.org/data/3.0/");
   // Параметри запиту
   let params = {
     lat: openWeatherConfig.lat,
@@ -15,6 +15,7 @@ function getOWUrl() {
   };
   // Додавання параметрів до URL
   url.search = new URLSearchParams(params);
+  console.log(url);
   return url;
   // let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${openWeatherConfig.lat}&lon=${openWeatherConfig.lon}&appid=${openWeatherConfig.API_KEY}&lang=ua&units=metric`;
   // let url = `http://api.openweathermap.org/data/2.5/forecast?id=${city_IDs.boryslav}&appid=${API_KEY}&lang=ua&units=metric`;
@@ -62,14 +63,12 @@ function createHeaderWeather(currentWeather) {
   );
   headerWeatherHint.innerHTML = `
   <div class="header-hint_temp">Температура: ${currentWeather.temp}</div>
-  <div class="header-hint_feels-temp">Відчувається як: ${
-    currentWeather.feelsTemp
-  }</div>
+  <div class="header-hint_feels-temp">Відчувається як: ${currentWeather.feelsTemp
+    }</div>
   <div class="header-hint_weather">Погода: ${currentWeather.weather}</div>
   <div class="header-hint_humidity">Вологість: ${currentWeather.humidity}</div>
-  <div class="header-hint_wind">Швидкість вітру: ${
-    currentWeather.windSpeed
-  }</div>
+  <div class="header-hint_wind">Швидкість вітру: ${currentWeather.windSpeed
+    }</div>
   <div class="header-hint_wind">Схід сонця: ${currentWeather.sunrise.getHours()}:${currentWeather.sunrise.getMinutes()}</div>
   <div class="header-hint_wind">Захід сонця: ${currentWeather.sunset.getHours()}:${currentWeather.sunset.getMinutes()}</div>          
   `;
@@ -78,7 +77,7 @@ function createWeatherCards(weather) {
   weather.forEach((day, index) => {
     let curDay =
       DAY_OF_A_WEEK[
-        curDayNum + index > 6 ? curDayNum + index - 7 : curDayNum + index
+      curDayNum + index > 6 ? curDayNum + index - 7 : curDayNum + index
       ];
     let weatherCard = document.createElement("div");
     weatherCard.className = "weather-card card-one";
