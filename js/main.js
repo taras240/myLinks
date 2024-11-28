@@ -63,8 +63,8 @@ function makeElement({ link, index, listName, parentContainer }) {
     linkPreview: link.preview
       ? link.preview
       : link.type === "folder"
-      ? "./src/img/folde.png"
-      : "",
+        ? "./src/img/folde.png"
+        : "",
     linkName: link.name,
   });
   element.addEventListener("contextmenu", (event) => {
@@ -93,9 +93,9 @@ function makeElement({ link, index, listName, parentContainer }) {
   });
   type === "folder"
     ? element.addEventListener("click", (e) => {
-        e.stopPropagation();
-        openFoler(link);
-      })
+      e.stopPropagation();
+      openFoler(link);
+    })
     : "";
   return element;
 }
@@ -120,11 +120,14 @@ function openLinkList(linksListName, container) {
   });
 }
 
-//////////////////////////////////////////////
-//////!     ADD EVENTS LISTINERS     //////////
-//////////////////////////////////////////////
+//?|----------------------------------------------------|
+//!|------|    ADD EVENTS LISTINERS
+//?|----------------------------------------------------|
 
-/// PRESS SOME BUTTON EVENTS       ///////////
+//?|----------------------------------------------------|
+//!|------|   PRESS SOME BUTTON EVENTS
+//?|----------------------------------------------------|
+
 document.addEventListener("keydown", (e) => {
   switch (e.code) {
     case "KeyP":
@@ -142,7 +145,9 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-////  CLOSE FOLDER BUTTON    ///////////////
+//?|----------------------------------------------------|
+//!|------|   CLOSE FOLDER BUTTON
+//?|----------------------------------------------------|
 document.querySelector(".close-folder_button").addEventListener("click", () => {
   closeFolder();
 });
@@ -274,7 +279,7 @@ function showContextMenu({ posX, posY, item, event, listName }) {
     .addEventListener("click", () => {
       removeElementByIndex(
         event.target.closest(".link-card")?.dataset.index ??
-          event.target.closest(".folder-card").dataset.index,
+        event.target.closest(".folder-card").dataset.index,
         listName
       );
     });
@@ -283,7 +288,7 @@ function showContextMenu({ posX, posY, item, event, listName }) {
     .addEventListener("click", () => {
       hideElementByIndex(
         event.target.closest(".link-card")?.dataset.index ??
-          event.target.closest(".folder-card").dataset.index,
+        event.target.closest(".folder-card").dataset.index,
         listName
       );
     }); //
@@ -358,7 +363,7 @@ function openCreationForChange({ element, listName, elementIndex }) {
     elementNameText: element.name,
     elementUrl: Array.isArray(element?.links) ? element?.href : "",
     isLink: element.type !== "folder",
-    isHidden: Boolean(element.hidden),
+    isHidden: !!element.hidden,
     iconUrl: element.preview,
     elentDescription: element.description,
     isEditing: true,

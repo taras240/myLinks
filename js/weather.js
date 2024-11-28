@@ -15,29 +15,27 @@ function getOWUrl() {
   };
   // Додавання параметрів до URL
   url.search = new URLSearchParams(params);
-  console.log(url);
   return url;
-  // let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${openWeatherConfig.lat}&lon=${openWeatherConfig.lon}&appid=${openWeatherConfig.API_KEY}&lang=ua&units=metric`;
-  // let url = `http://api.openweathermap.org/data/2.5/forecast?id=${city_IDs.boryslav}&appid=${API_KEY}&lang=ua&units=metric`;
 }
 
 let curDayNum = new Date().getDay();
 let weather = [];
 let currentWeather = {};
 
-function parseWeather(weatherJSON) {
+function parseWeather(weatherObj) {
   // console.log(weatherJSON);
+  const w = weatherObj.current;
   currentWeather = {
-    temp: Math.round(weatherJSON.current.temp) + "°C",
-    iconName: weatherJSON.current.weather[0].icon,
-    weather: weatherJSON.current.weather[0].description,
-    humidity: weatherJSON.current.humidity + "%",
-    feelsTemp: Math.round(weatherJSON.current.feels_like) + "°C",
-    windSpeed: Math.round(weatherJSON.current.wind_speed) + "м/с",
-    sunrise: new Date(weatherJSON.current.sunrise * 1000),
-    sunset: new Date(weatherJSON.current.sunset * 1000),
+    temp: Math.round(w.temp) + "°C",
+    iconName: w.weather[0].icon,
+    weather: w.weather[0].description,
+    humidity: w.humidity + "%",
+    feelsTemp: Math.round(w.feels_like) + "°C",
+    windSpeed: Math.round(w.wind_speed) + "м/с",
+    sunrise: new Date(w.sunrise * 1000),
+    sunset: new Date(w.sunset * 1000),
   };
-  weatherJSON.daily.forEach((day) => {
+  weatherObj.daily.forEach((day) => {
     let dayWeather = {
       minTemp: Math.round(day.temp.min),
       maxTemp: Math.round(day.temp.max),
@@ -46,6 +44,7 @@ function parseWeather(weatherJSON) {
       iconName: day.weather[0].icon,
       precipitationProb: Math.round(day.pop * 100) ?? 0,
     };
+
     weather.push(dayWeather);
   });
   updateClockWeather(currentWeather);
@@ -57,23 +56,33 @@ function updateClockWeather(weather) {
 }
 function createHeaderWeather(currentWeather) {
   // headerTemp.innerText = currentWeather.temp;
-  headerWeatherPrev.setAttribute(
-    "src",
-    `https://openweathermap.org/img/wn/${currentWeather.iconName}@2x.png`
-  );
+  headerWeatherPrev.src = `https://openweathermap.org/img/wn/${currentWeather.iconName}@2x.png`;
   headerWeatherHint.innerHTML = `
-  <div class="header-hint_temp">Температура: ${currentWeather.temp}</div>
-  <div class="header-hint_feels-temp">Відчувається як: ${currentWeather.feelsTemp
-    }</div>
-  <div class="header-hint_weather">Погода: ${currentWeather.weather}</div>
-  <div class="header-hint_humidity">Вологість: ${currentWeather.humidity}</div>
-  <div class="header-hint_wind">Швидкість вітру: ${currentWeather.windSpeed
-    }</div>
-  <div class="header-hint_wind">Схід сонця: ${currentWeather.sunrise.getHours()}:${currentWeather.sunrise.getMinutes()}</div>
-  <div class="header-hint_wind">Захід сонця: ${currentWeather.sunset.getHours()}:${currentWeather.sunset.getMinutes()}</div>          
+    <div class="header-hint_temp">
+      Температура: ${currentWeather.temp}
+    </div>
+    <div class="header-hint_feels-temp">
+      Відчувається як: ${currentWeather.feelsTemp}
+    </div>
+    <div class="header-hint_weather">
+      Погода: ${currentWeather.weather}
+    </div>
+    <div class="header-hint_humidity">
+      Вологість: ${currentWeather.humidity}
+    </div>
+    <div class="header-hint_wind">
+      Швидкість вітру: ${currentWeather.windSpeed}
+    </div>
+    <div class="header-hint_wind">
+      Схід сонця: ${currentWeather.sunrise.getHours()}:${currentWeather.sunrise.getMinutes()}
+    </div>
+    <div class="header-hint_wind">
+      Захід сонця: ${currentWeather.sunset.getHours()}:${currentWeather.sunset.getMinutes()}
+    </div>          
   `;
 }
 function createWeatherCards(weather) {
+  console.log(weather)
   weather.forEach((day, index) => {
     let curDay =
       DAY_OF_A_WEEK[

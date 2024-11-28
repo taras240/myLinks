@@ -4,5 +4,6 @@
   "scss.hover.references": false,
   "html.hover.references": false,
   "css.hover.references": false,
-  "editor.hover.delay": 500
+  "editor.hover.delay": 500,
+  "editor.fontFamily": "Consolas"
 }
