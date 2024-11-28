@@ -28,23 +28,23 @@ let currentWeather = {};
 function parseWeather(weatherJSON) {
   // console.log(weatherJSON);
   currentWeather = {
-    temp: Math.round(weatherJSON["current"]["temp"]) + "°C",
-    iconName: weatherJSON["current"]["weather"][0]["icon"],
-    weather: weatherJSON["current"]["weather"][0]["description"],
-    humidity: weatherJSON["current"]["humidity"] + "%",
-    feelsTemp: Math.round(weatherJSON["current"]["feels_like"]) + "°C",
-    windSpeed: Math.round(weatherJSON["current"]["wind_speed"]) + "м/с",
-    sunrise: new Date(weatherJSON["current"]["sunrise"] * 1000),
-    sunset: new Date(weatherJSON["current"]["sunset"] * 1000),
+    temp: Math.round(weatherJSON.current.temp) + "°C",
+    iconName: weatherJSON.current.weather[0].icon,
+    weather: weatherJSON.current.weather[0].description,
+    humidity: weatherJSON.current.humidity + "%",
+    feelsTemp: Math.round(weatherJSON.current.feels_like) + "°C",
+    windSpeed: Math.round(weatherJSON.current.wind_speed) + "м/с",
+    sunrise: new Date(weatherJSON.current.sunrise * 1000),
+    sunset: new Date(weatherJSON.current.sunset * 1000),
   };
-  weatherJSON["daily"].forEach((day) => {
+  weatherJSON.daily.forEach((day) => {
     let dayWeather = {
-      minTemp: Math.round(day["temp"]["min"]),
-      maxTemp: Math.round(day["temp"]["max"]),
-      humidity: day["humidity"],
-      weather: day["weather"][0]["description"],
-      iconName: day["weather"][0]["icon"],
-      precipitationProb: Math.round(day["pop"] * 100) ?? 0,
+      minTemp: Math.round(day.temp.min),
+      maxTemp: Math.round(day.temp.max),
+      humidity: day.humidity,
+      weather: day.weather[0].description,
+      iconName: day.weather[0].icon,
+      precipitationProb: Math.round(day.pop * 100) ?? 0,
     };
     weather.push(dayWeather);
   });
