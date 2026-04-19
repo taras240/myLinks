@@ -3,9 +3,10 @@ header {
   top: 0;
   background-color: var(--header-color);
 }
+
 .header_container {
-  max-width: 1200px;
-  padding: 10px;
+  /* max-width: 1200px; */
+  padding: 0 2rem;
   margin: auto;
   display: flex;
   flex-direction: row;
@@ -17,12 +18,14 @@ header {
   font-weight: 400;
   font-size: 1.7rem;
 }
+
 .header-logo {
   flex: 1;
   font-size: 30px;
   margin-right: 50px;
   pointer-events: none;
 }
+
 /* #header-clock {
     color: white;
   
@@ -35,6 +38,7 @@ header {
   gap: 5px;
   /* pointer-events: all; */
 }
+
 .header-weather_prev {
   height: 60px;
 }

@@ -13,8 +13,8 @@
   box-shadow: var(--black-shadow);
   /* overflow: hidden; */
 }
+
 .context-menu_header {
-  line-height: 3rem;
   color: var(--bright-color);
   border-bottom: 1px solid var(--bright-color);
   font-weight: 600;
@@ -22,33 +22,37 @@
   width: 100%;
   text-align: center;
 }
+
 .context-button {
-  padding: 0 10px;
-  line-height: 3rem;
+  padding: 0.5rem 1rem;
   font-size: inherit;
   color: inherit;
   background-color: inherit;
   width: 100%;
   transition: 0.2s;
 }
+
 .context-button:not(:last-child) {
   border-bottom: 1px solid var(--primary-color);
 }
+
 .context-button:last-child {
   border-radius: 0 0 10px 10px;
 }
+
 .context-button.delete-element_button {
   color: var(--red-color);
   border-radius: 0 0 10px 10px;
 }
+
 .context-button:hover {
-  background-color: var(--hover-color);
-  box-shadow: var(--hover-shadow);
+  background-color: white;
   /* font-weight: 600; */
   color: black;
   z-index: 2;
   transition: 0.2s;
 }
+
 .context-button.delete-element_button:hover {
   background-color: var(--hover-color);
   box-shadow: var(--red-shadow);
@@ -56,6 +60,7 @@
 
   transition: 0.2s;
 }
+
 .context-button:disabled {
   pointer-events: none;
   color: gray;

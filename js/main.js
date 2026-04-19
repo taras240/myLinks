@@ -1,3 +1,4 @@
+
 const MAIN_LIST_NAME = "links-list";
 const CUR_VERSION = 2;
 const MIN_VERSION = 2;
@@ -361,7 +362,7 @@ function openCreationForChange({ element, listName, elementIndex }) {
   creationContainer.innerHTML = generateCreationFormHtml({
     headerText: "Редагування елемента",
     elementNameText: element.name,
-    elementUrl: Array.isArray(element?.links) ? element?.href : "",
+    elementUrl: element.href,
     isLink: element.type !== "folder",
     isHidden: !!element.hidden,
     iconUrl: element.preview,
